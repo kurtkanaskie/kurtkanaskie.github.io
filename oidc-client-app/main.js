@@ -24,8 +24,10 @@ mainApp.controller('CustomerController', function($scope) {
 		method : "GET",
 		url : "https://apibaas-trial.apigee.net/kurtkanaskie/sandbox/customers"
 	}).then(function mySucces(response) {
+      $scope.message = "OK";
       $scope.customers = response.data.entities;
     }, function myError(response) {
+      $scope.message = "Uh oh";
       $scope.customers = response.status;
 	});
 
