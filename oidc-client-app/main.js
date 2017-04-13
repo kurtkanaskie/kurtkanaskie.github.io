@@ -4,7 +4,7 @@ mainApp.config(function($routeProvider) {
 	$routeProvider
 		.when('/home', {
 			templateUrl: 'home.html',
-			controller: 'CustomerController'
+			controller: 'HomeController'
 		})
 		.when('/viewCustomers', {
 			templateUrl: 'viewCustomers.html',
@@ -13,6 +13,10 @@ mainApp.config(function($routeProvider) {
 		.otherwise({
 			redirectTo: '/home'
 		});
+});
+
+mainApp.controller('HomeController', function($scope) {
+	$scope.message = "Click to view customers.";
 });
 
 mainApp.controller('CustomerController', function($scope) {
@@ -25,5 +29,4 @@ mainApp.controller('CustomerController', function($scope) {
       $scope.customers = response.status;
 	});
 
-	$scope.message = "Click to view customers.";
 });
