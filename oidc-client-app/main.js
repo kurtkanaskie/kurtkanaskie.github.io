@@ -19,7 +19,8 @@ mainApp.controller('HomeController', function($scope) {
 	$scope.message = "Click to view customers.";
 });
 
-mainApp.controller('CustomerController', function($scope) {
+mainApp.controller('CustomerController', function($scope, $http) {
+    $scope.message = "Here";
 	$http({
 		method : "GET",
 		url : "https://apibaas-trial.apigee.net/kurtkanaskie/sandbox/customers"
