@@ -1,31 +1,18 @@
 <!DOCTYPE html>
 <html>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-<body>
+	<head lang="en">
+	  <meta charset="utf-8">
+	  <title>OIDC Client App</title>
 
-<script>
-var app = angular.module("myShoppingList", []); 
-app.controller("myCtrl", function($scope) {
-    $scope.products = ["Milk", "Bread", "Cheese"];
-    $scope.addItem = function () {
-        $scope.products.push($scope.addMe);
-    }    
-    $scope.removeItem = function (x) {
-        $scope.products.splice(x, 1);
-    }
-});
-</script>
+	</head>
+	<body>
 
-<div ng-app="myShoppingList" ng-controller="myCtrl">
-<h1>Test</h1>
-  <ul>
-    <li ng-repeat="x in products">{{x}}<span ng-click="removeItem($index)">×</span></li>
-  </ul>
-  <input ng-model="addMe">
-  <button ng-click="addItem()">Add</button>
-</div>
+	  <div ng-app="mainApp">
+		<ng-view></ng-view>
+	  </div>
 
-<p>Click the little x to remove an item from the shopping list.</p>
-
-</body>
+	  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.28/angular.min.js"></script>
+	  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.28/angular-route.min.js"></script>
+	  <script type="text/javascript" src="main.js"></script>
+	</body>
 </html>
