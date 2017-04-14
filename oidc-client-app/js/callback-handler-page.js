@@ -34,7 +34,6 @@ function formatIdToken() {
 
 
 $(document).ready(function() {
-$scope.message = "Callback Handler Page";
   var search = window.location.hash,
       hash = {},
       fnStartsWith = function(s, searchString, position) {
@@ -57,6 +56,8 @@ $scope.message = "Callback Handler Page";
   // emit that information into fields in the output:
   var $$ = $('#output');
   $$.empty();
+
+  $$.append("<p>Callback Handler Page</p>");
 
   Object.keys(hash).forEach(function(key){
     if (key) {

@@ -25,14 +25,11 @@ mainApp.config(function($routeProvider) {
 
 mainApp.controller('HomeController', function($scope, $http) {
 	$scope.message = "Click to authorize then view customers.";
+	$scope.callback = "https://tmobileh-sb05.apigee.net/oidc-core/oauth2/authorize?client_id=AO7wf24CFswJeX6UmaKdbRcJ1uhMJaoh&redirect_uri=https://kurtkanaskie.github.io/oidc-client-app/index.html#/callback.html&response_type=token+id_token&state=A&scope=openid+profile&nonce=" + timestamp();
 });
 
 mainApp.controller('AuthorizeController', function($scope, $http) {
 	$scope.message = "Complete form, using id_token for implicit flow, code for code flow.";
-	$http({
-		method : "GET",
-		url : "https://tmobileh-sb05.apigee.net/oidc-core/oauth2/authorize?client_id=AO7wf24CFswJeX6UmaKdbRcJ1uhMJaoh&redirect_uri=https://kurtkanaskie.github.io/oidc-client-app/index.html#/callback.html&response_type=token+id_token&state=A&scope=openid+profile&nonce="
-	});
 });
 
 mainApp.controller('CallbackController', function($scope, $http) {
