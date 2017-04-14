@@ -6,10 +6,6 @@ mainApp.config(function($routeProvider, $locationProvider) {
 			templateUrl: 'home.html',
 			controller: 'HomeController'
 		})
-		.when('/authorize', {
-			templateUrl: 'authorize.html',
-			controller: 'AuthorizeController'
-		})
 		.when('/callback', {
 			templateUrl: 'callback.html',
 			controller: 'CallbackController'
@@ -19,7 +15,7 @@ mainApp.config(function($routeProvider, $locationProvider) {
 			controller: 'CustomersController'
 		})
 		.otherwise({
-			redirectTo: '/home'
+			redirectTo: '/'
 		});
 
 		$locationProvider.html5Mode(true);
@@ -29,10 +25,6 @@ mainApp.controller('HomeController', function($scope, $http) {
 	$scope.message = "Click to authorize then view customers.";
     $scope.date = Date.now();
 	$scope.callback = "https://tmobileh-sb05.apigee.net/oidc-core/oauth2/authorize?client_id=AO7wf24CFswJeX6UmaKdbRcJ1uhMJaoh&redirect_uri=https://kurtkanaskie.github.io/oidc-client-app/callback.html&response_type=token+id_token&state=A&scope=openid+profile&nonce=" + Date.now();
-});
-
-mainApp.controller('AuthorizeController', function($scope, $http) {
-	$scope.message = "Complete form, using id_token for implicit flow, code for code flow.";
 });
 
 mainApp.controller('CallbackController', function($scope, $http) {
