@@ -34,6 +34,7 @@ function formatIdToken() {
 
 
 $(document).ready(function() {
+$scope.message = "Callback Handler Page";
   var search = window.location.hash,
       hash = {},
       fnStartsWith = function(s, searchString, position) {
