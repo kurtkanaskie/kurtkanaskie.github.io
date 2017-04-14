@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>OIDC Client</title>
+  
+
+  <script src="//code.angularjs.org/snapshot/angular.min.js"></script>
+  <script src="//code.angularjs.org/snapshot/angular-route.js"></script>
+  <script src="script.js"></script>
+  
+
+  <script type="text/javascript">
+    angular.element(document.getElementsByTagName('head')).append(angular.element('<base href="' + window.location.pathname + '" />'));
+  </script>
+</head>
+<body ng-app="ngRouteExample">
+  <div ng-controller="MainController">
+	<h2> OIDC Demo Client </h2>
+	<p>{{name}}</p>
+	<p>{{message}}</p>
+	<p>{{date}}</p>
+	<p>{{authorize}}</p>
+	<p><a href="{{authorize}}"> Sign In</a></p>
+	<p><a href="customers"> View Customers</a></p>
+
+  <div ng-view></div>
+
+  <hr />
+</div>
+</body>
+</html>
+
+<!-- 
+Copyright 2017 Google Inc. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://angular.io/license
+-->

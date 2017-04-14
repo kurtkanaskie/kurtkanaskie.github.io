@@ -1,0 +1,14 @@
+<div class="container">
+	<h2> View Customers </h2>
+    <p>{{name}}</p>
+    <p>{{status}}</p>
+	Search among:
+	<br/>
+		<input type="text" ng-model="name" />
+	<br/>
+	<ul>
+		<li ng-repeat="customer in customers | filter:name">{{customer.customerName}} , {{customer.status}}</li>
+	</ul>
+
+	<a href="home"> Back</a>
+</div>
