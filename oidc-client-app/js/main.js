@@ -11,7 +11,7 @@ mainApp.config(function($routeProvider, $locationProvider) {
 			controller: 'CallbackController'
 		})
 		.when('/oidc-client-app/customers', {
-			templateUrl: 'customers.html',
+			templateUrl: 'oidc-client-app/customers.html',
 			controller: 'CustomersController'
 		})
 		.otherwise({
@@ -24,7 +24,7 @@ mainApp.config(function($routeProvider, $locationProvider) {
 mainApp.controller('HomeController', function($scope, $http) {
 	$scope.message = "Click to authorize then view customers.";
     $scope.date = Date.now();
-	$scope.callback = "https://tmobileh-sb05.apigee.net/oidc-core/oauth2/authorize?client_id=AO7wf24CFswJeX6UmaKdbRcJ1uhMJaoh&redirect_uri=https://kurtkanaskie.github.io/oidc-client-app/callback.html&response_type=token+id_token&state=A&scope=openid+profile&nonce=" + Date.now();
+	$scope.authorize = "https://tmobileh-sb05.apigee.net/oidc-core/oauth2/authorize?client_id=AO7wf24CFswJeX6UmaKdbRcJ1uhMJaoh&redirect_uri=https://kurtkanaskie.github.io/oidc-client-app/callback.html&response_type=token+id_token&state=A&scope=openid+profile&nonce=" + Date.now();
 });
 
 mainApp.controller('CallbackController', function($scope, $http) {
