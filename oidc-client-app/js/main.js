@@ -1,17 +1,17 @@
-var mainApp = angular.module("mainApp", ['ngRoute']);
+var app = angular.module("app", ['ngRoute']);
 
-mainApp.config(function($routeProvider, $locationProvider) {
+app.config(function($routeProvider, $locationProvider) {
 	$routeProvider
 		.when('/home', {
-			templateUrl: 'home.html',
+			templateUrl: 'app/home.html',
 			controller: 'HomeController'
 		})
 		.when('/callback', {
-			templateUrl: 'callback.html',
+			templateUrl: 'app/callback.html',
 			controller: 'CallbackController'
 		})
 		.when('/customers', {
-			templateUrl: 'customers.html',
+			templateUrl: 'app/customers.html',
 			controller: 'CustomersController'
 		})
 		.otherwise({
@@ -21,17 +21,17 @@ mainApp.config(function($routeProvider, $locationProvider) {
 		$locationProvider.html5Mode(true);
 });
 
-mainApp.controller('HomeController', function($scope, $http) {
+app.controller('HomeController', function($scope, $http) {
 	$scope.message = "Click to authorize then view customers.";
     $scope.date = Date.now();
 	$scope.callback = "https://tmobileh-sb05.apigee.net/oidc-core/oauth2/authorize?client_id=AO7wf24CFswJeX6UmaKdbRcJ1uhMJaoh&redirect_uri=https://kurtkanaskie.github.io/oidc-client-app/callback.html&response_type=token+id_token&state=A&scope=openid+profile&nonce=" + Date.now();
 });
 
-mainApp.controller('CallbackController', function($scope, $http) {
+app.controller('CallbackController', function($scope, $http) {
 	$scope.message = "Callback Handler";
 });
 
-mainApp.controller('CustomersController', function($scope, $http) {
+app.controller('CustomersController', function($scope, $http) {
 	$http({
 		method : "GET",
 		url : "https://apibaas-trial.apigee.net/kurtkanaskie/sandbox/customers"
