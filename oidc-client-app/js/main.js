@@ -3,14 +3,14 @@ var app = angular.module("app", ['ngRoute']);
 app.config(function($routeProvider, $locationProvider) {
 	$routeProvider
 		.when('/home', {
-			templateUrl: 'home.html',
+			templateUrl: 'oidc-client-app/home.html',
 			controller: 'HomeController'
 		})
 		.when('/callback', {
-			templateUrl: 'callback.html',
+			templateUrl: 'oidc-client-app/callback.html',
 			controller: 'CallbackController'
 		})
-		.when('/customers', {
+		.when('/oidc-client-app/customers', {
 			templateUrl: 'customers.html',
 			controller: 'CustomersController'
 		})
