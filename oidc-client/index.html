@@ -17,11 +17,12 @@
 <body ng-app="ngRouteExample">
   <div ng-controller="MainController">
 	<h2> OIDC Demo Client </h2>
-	<p>{{name}}</p>
+	<p>{{controllerName}}</p>
 	<p>{{message}}</p>
 	<p>{{status}}</p>
 	<p>{{date}}</p>
 	<p>{{authorize}}</p>
+	<p>From callback: {{$routeParams}}</p>
 	<p><a href="{{authorize}}"> Sign In</a></p>
 	<p><a href="customers"> View Customers</a></p>
 

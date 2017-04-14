@@ -3,14 +3,13 @@
 angular.module('ngRouteExample', ['ngRoute'])
 
  .controller('MainController', function($scope, $route, $routeParams, $location) {
-    $scope.name = 'MainController';
+    $scope.controllerName = 'MainController';
 	$scope.message = "Click to authorize then view customers.";
-    $scope.date = Date.now();
 	$scope.authorize = "https://tmobileh-sb05.apigee.net/oidc-core/oauth2/authorize?client_id=AO7wf24CFswJeX6UmaKdbRcJ1uhMJaoh&redirect_uri=https://kurtkanaskie.github.io/oidc-client/callback&response_type=token+id_token&state=A&scope=openid+profile&nonce=" + Date.now();
  })
 
  .controller('CustomersController', function($scope, $http) {
-    $scope.name = 'CustomersController';
+    $scope.controllerName = 'CustomersController';
 	$http({
 		method : "GET",
 		url : "https://apibaas-trial.apigee.net/kurtkanaskie/sandbox/customers"
@@ -26,7 +25,8 @@ angular.module('ngRouteExample', ['ngRoute'])
  })
 
  .controller('CallbackController', function($scope, $routeParams) {
-    $scope.name = 'CallbackController';
+    $scope.controllerName = 'CallbackController';
+    $scope.message = $routeParams;
  })
 
 .config(function($routeProvider, $locationProvider) {
