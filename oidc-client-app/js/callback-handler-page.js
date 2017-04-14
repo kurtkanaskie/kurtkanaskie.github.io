@@ -33,7 +33,7 @@ function formatIdToken() {
 }
 
 
-$(document).ready(function() {
+$(document).ready(function($scope) {
   var search = window.location.hash,
       hash = {},
       fnStartsWith = function(s, searchString, position) {
@@ -58,6 +58,7 @@ $(document).ready(function() {
   $$.empty();
 
   $$.append("<p>Callback Handler Page</p>");
+  $scope.message = "Yipee!";
 
   Object.keys(hash).forEach(function(key){
     if (key) {
