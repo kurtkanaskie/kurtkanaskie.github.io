@@ -3,19 +3,19 @@ var app = angular.module("app", ['ngRoute']);
 app.config(function($routeProvider, $locationProvider) {
 	$routeProvider
 		.when('/home', {
-			templateUrl: 'app/home.html',
+			templateUrl: 'home.html',
 			controller: 'HomeController'
 		})
 		.when('/callback', {
-			templateUrl: 'app/callback.html',
+			templateUrl: 'callback.html',
 			controller: 'CallbackController'
 		})
 		.when('/customers', {
-			templateUrl: 'app/customers.html',
+			templateUrl: 'customers.html',
 			controller: 'CustomersController'
 		})
 		.otherwise({
-			redirectTo: '/'
+			redirectTo: '/home'
 		});
 
 		$locationProvider.html5Mode(true);
