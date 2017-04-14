@@ -15,11 +15,13 @@ angular.module('ngRouteExample', ['ngRoute'])
 		method : "GET",
 		url : "https://apibaas-trial.apigee.net/kurtkanaskie/sandbox/customers"
 	}).then(function mySucces(response) {
-      $scope.status = "OK";
+      $scope.message = "OK";
+      $scope.status = response.status;
       $scope.customers = response.data.entities;
     }, function myError(response) {
-      $scope.status = "Uh oh";
-      $scope.customers = response.status;
+      $scope.message = "Uh oh";
+      $scope.status = response.status;
+      $scope.customers = [];
 	});
  })
 
