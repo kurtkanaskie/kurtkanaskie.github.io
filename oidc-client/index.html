@@ -16,6 +16,11 @@
 </head>
 <body ng-app="ngRouteExample">
   <div ng-controller="MainController">
+	<p>{{controllerName}}</p>
+	<p>Message: {{message}}</p>
+	<p>Status: {{status}}</p>
+	<p>{{authorize}}</p>
+	<p>From callback: {{$routeParams}}</p>
 	<h2> OIDC Demo Client </h2>
 	<p><a href="{{authorize}}"> Sign In</a></p>
 	<p><a href="customers"> View Customers</a></p>

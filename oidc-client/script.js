@@ -48,12 +48,12 @@ angular.module('ngRouteExample', ['ngRoute'])
         params[key] = value;
         $rootScope.accesstoken=params;
     }
-    $location.path("/home");
+    $location.path("/");
  })
 
 .config(function($routeProvider, $locationProvider) {
   $routeProvider
-   .when('/home', {
+   .when('/', {
     templateUrl: 'home.html',
     controller: 'MainController'
   })
