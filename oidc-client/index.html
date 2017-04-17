@@ -16,11 +16,7 @@
 </head>
 <body ng-app="ngRouteExample">
   <div ng-controller="MainController">
-	<p>{{controllerName}}</p>
-	<p>Message: {{message}}</p>
-	<p>Status: {{status}}</p>
 	<p>{{authorize}}</p>
-	<p>From callback: {{$routeParams}}</p>
 	<h2> OIDC Demo Client </h2>
 	<p><a href="{{authorize}}"> Sign In</a></p>
 	<p><a href="customers"> View Customers</a></p>
@@ -30,6 +26,13 @@
   <div ng-view></div>
 
   <hr />
+
+  <pre>Controller is: {{$controllerName()}}</pre>
+  <pre>$location.path() = {{$location.path()}}</pre>
+  <pre>$route.current.templateUrl = {{$route.current.templateUrl}}</pre>
+  <pre>$route.current.params = {{$route.current.params}}</pre>
+  <pre>$route.current.scope.name = {{$route.current.scope.name}}</pre>
+  <pre>$routeParams = {{$routeParams}}</pre>
 </div>
 </body>
 </html>
