@@ -53,7 +53,7 @@ angular.module('ngRouteExample', ['ngRoute'])
 
 .config(function($routeProvider, $locationProvider) {
   $routeProvider
-   .when('/', {
+   .when('/home', {
     templateUrl: 'home.html',
     controller: 'MainController'
   })
