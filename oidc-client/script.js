@@ -9,7 +9,7 @@ angular.module('ngRouteExample', ['ngRoute'])
  })
 
  /*
- https://kurtkanaskie.github.io/oidc-client/callback
+ https://kurtkanaskie.github.io/oidc-client/
     #state=A
     &id_token=eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvdG1vYmlsZWgtc2IwNS5hcGlnZWUubmV0Iiwic3ViIjoiYm9laW5nYmlsbHVzZXJAdC1tb2JpbGUuY29tIiwiYXVkIjoiQU83d2YyNENGc3dKZVg2VW1hS2RiUmNKMXVoTUphb2giLCJleHAiOjE0OTI0NDIyMjYsIm5vbmNlIjoiMTQ5MjQ0MTYzODE0MyIsImlhdCI6MTQ5MjQ0MTY2MH0.rzs5rek9n8GImp0wYNKT3DFOv3geo7x40om-jm2YggI
     &access_token=mPqpPz5tGjme1gd0Am6UA9n93HLl
