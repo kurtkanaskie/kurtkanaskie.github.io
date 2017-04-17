@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <script>
+ /*
+ https://kurtkanaskie.github.io/oidc-client/
+    #state=A
+    &id_token=eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvdG1vYmlsZWgtc2IwNS5hcGlnZWUubmV0Iiwic3ViIjoiYm9laW5nYmlsbHVzZXJAdC1tb2JpbGUuY29tIiwiYXVkIjoiQU83d2YyNENGc3dKZVg2VW1hS2RiUmNKMXVoTUphb2giLCJleHAiOjE0OTI0NDIyMjYsIm5vbmNlIjoiMTQ5MjQ0MTYzODE0MyIsImlhdCI6MTQ5MjQ0MTY2MH0.rzs5rek9n8GImp0wYNKT3DFOv3geo7x40om-jm2YggI
+    &access_token=mPqpPz5tGjme1gd0Am6UA9n93HLl
+    &expires=599
+    &token_type=Bearer
+ */
+            var callbackResponse = (document.URL).split("#")[1];
+            var responseParameters = (callbackResponse).split("&");
+            var parameterMap = [];
+            for(var i = 0; i < responseParameters.length; i++) {
+                parameterMap[responseParameters[i].split("=")[0]] = responseParameters[i].split("=")[1];
+            }
+            if(parameterMap.access_token !== undefined && parameterMap.access_token !== null) {
+                var oidc = {
+                    oauth: {
+                        id_token: parameterMap.id_token,
+                        access_token: parameterMap.access_token,
+                        expires: parameterMap.expires,
+                        token_type: parameterMap.token_type
+                    }
+                };
+                window.localStorage.setItem("oidc", JSON.stringify(oidc));
+                window.location.href = "https://kurtkanaskie.github.io/oidc-implicit#/secure";
+            } else {
+                alert("Problem authenticating");
+            }
+        </script>
+    </head>
+    <body>Redirecting...</body>
+</html>
