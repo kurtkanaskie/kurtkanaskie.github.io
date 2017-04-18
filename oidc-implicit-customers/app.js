@@ -16,16 +16,10 @@ app.config(function($stateProvider, $urlRouterProvider) {
 });
  
 app.controller("HomeController", function($scope, $state, $window) {
+	console.log( "HomeController" );
  
 	var url = "https://tmobileh-sb05.apigee.net/oidc-core/oauth2/authorize?client_id=AO7wf24CFswJeX6UmaKdbRcJ1uhMJaoh&redirect_uri=https://kurtkanaskie.github.io/oidc-implicit-customers/callback.html&response_type=token+id_token&state=A&scope=openid+profile&nonce=" + Date.now();
 	$scope.authorize = url;
-
-	var signedIn = $window.localStorage.getItem("signedIn");
-	console.log( "signedIn is: =" + signedIn + "=" );
-	if( signedIn == "null" || signedIn === null || signedIn == "" ) {
-		$window.localStorage.setItem("signedIn", "not ");
-		console.log( "signedIn: " + signedIn );
-	}
 
     $scope.login = function() {
 		console.log( "log in" );
@@ -38,9 +32,15 @@ app.controller("HomeController", function($scope, $state, $window) {
 		console.log( "log out" );
     }
 
-	$scope.signedIn = $window.localStorage.getItem("signedIn");
-	console.log( "SIGNED IN: " + $scope.signedIn );
+	var signedIn = $window.localStorage.getItem("signedIn");
+	console.log( "signedIn is: =" + signedIn + "=" );
+	if( signedIn === "" ) {
+		$window.localStorage.setItem("signedIn", "not ");
+		console.log( "signedIn: " + signedIn );
+	}
 
+	$scope.signedIn = $window.localStorage.getItem("signedIn");
+	console.log( "Signed In: " + $scope.signedIn );
  
 });
 
@@ -48,7 +48,7 @@ app.controller("CustomersController", function($scope, $http, $window) {
  
 	var oidc = $window.localStorage.getItem("oidc");
 	console.log( "CustomersController oidc =" + oidc + "=" );
-	if( oidc == "null" || oidc === null || oidc == "" ) {
+	if( oidc === "" ) {
 		console.log( "not log in" );
 		  $scope.status = 401;
 		  $scope.message = "You are not logged in";
