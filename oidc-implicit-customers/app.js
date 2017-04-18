@@ -15,28 +15,28 @@ app.config(function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/home');
 });
  
-app.controller("HomeController", function($scope, $state) {
+app.controller("HomeController", function($scope, $state, $window) {
  
 	var url = "https://tmobileh-sb05.apigee.net/oidc-core/oauth2/authorize?client_id=AO7wf24CFswJeX6UmaKdbRcJ1uhMJaoh&redirect_uri=https://kurtkanaskie.github.io/oidc-implicit-customers/callback.html&response_type=token+id_token&state=A&scope=openid+profile&nonce=" + Date.now();
 	$scope.authorize = url;
 
-	var signedIn = window.localStorage.getItem("signedIn");
+	var signedIn = $window.localStorage.getItem("signedIn");
 	if( signedIn === null || signedIn == "" ) {
-		window.localStorage.setItem("signedIn", "not ");
+		$window.localStorage.setItem("signedIn", "not ");
 	}
 
     $scope.login = function() {
 		console.log( "log in" );
-        window.location.href = url;
+        $window.location.href = url;
     }
     $scope.logout = function() {
-		window.localStorage.setItem("signedIn", "not ");
-		window.localStorage.setItem("oidc", "");
+		$window.localStorage.setItem("signedIn", "not ");
+		$window.localStorage.setItem("oidc", "");
 		$state.reload();
 		console.log( "log out" );
     }
 
-	$scope.signedIn = window.localStorage.getItem("signedIn");
+	$scope.signedIn = $window.localStorage.getItem("signedIn");
 	console.log( "SIGNED IN: " + $scope.signedIn );
 
  
@@ -44,15 +44,15 @@ app.controller("HomeController", function($scope, $state) {
 
 app.controller("CustomersController", function($scope, $http) {
  
-	var oidc = window.localStorage.getItem("oidc");
+	var oidc = $window.localStorage.getItem("oidc");
 	console.log( "CustomersController =" + oidc + "=" );
-	if( oidc === null || oidc == "" ) {
+	if( oidc == null || oidc === null || oidc == "" ) {
 		console.log( "not log in" );
 		  $scope.status = 401;
 		  $scope.message = "You are not logged in";
 	} else {
 
-    	var token = JSON.parse(window.localStorage.getItem("oidc")).oauth.access_token;
+    	var token = JSON.parse($window.localStorage.getItem("oidc")).oauth.access_token;
 
 		$http({
 			headers: {"Authorization":"Bearer " + token},
