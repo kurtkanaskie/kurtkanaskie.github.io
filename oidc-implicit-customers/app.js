@@ -27,10 +27,13 @@ app.controller("HomeController", function($scope) {
 
     $scope.login = function() {
         window.location.href = url;
+		console.log( "log in" );
     }
     $scope.logout = function() {
 		window.localStorage.setItem("signedIn", "not ");
 		window.localStorage.setItem("oidc", "");
+		window.location.href = "https://kurtkanaskie.github.io/oidc-implicit-customers/index.html#/home";
+		console.log( "log out" );
     }
 
 	$scope.signedIn = window.localStorage.getItem("signedIn");
@@ -48,10 +51,12 @@ app.controller("CustomersController", function($scope, $http) {
         method : "GET",
         url : "https://tmobileh-sb05.apigee.net/atwork/v5/customers"
     }).then(function (response) {
+		console.log( "Customers OK: " + response.status + response.data );
       $scope.status = response.status;
       $scope.message = "OK";
       $scope.customers = response.data.entities;
     }, function (response) {
+		console.log( "Customers ERROR: " + response.status + response.data );
       $scope.status = response.status;
       $scope.message = JSON.stringify(response.data);
       $scope.customers = [];
