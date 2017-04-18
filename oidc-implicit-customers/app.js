@@ -28,6 +28,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 app.controller("HomeController", function($scope) {
  
 	var url = "https://tmobileh-sb05.apigee.net/oidc-core/oauth2/authorize?client_id=AO7wf24CFswJeX6UmaKdbRcJ1uhMJaoh&redirect_uri=https://kurtkanaskie.github.io/oidc-implicit-customers/callback.html&response_type=token+id_token&state=A&scope=openid+profile&nonce=" + Date.now();
+	$scope.authorize = url;
     $scope.login = function() {
         window.location.href = url;
     }
