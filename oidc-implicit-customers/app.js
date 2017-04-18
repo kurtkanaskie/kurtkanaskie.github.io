@@ -7,11 +7,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
             templateUrl: 'home.html',
             controller: 'HomeController'
         })
-        .state('login', {
-            url: '/login',
-            templateUrl: 'login.html',
-            controller: 'LoginController'
-        })
         .state('secure', {
             url: '/secure',
             templateUrl: 'secure.html',
@@ -35,15 +30,6 @@ app.controller("HomeController", function($scope) {
  
 });
 
-app.controller("LoginController", function($scope) {
- 
-	var url = "https://tmobileh-sb05.apigee.net/oidc-core/oauth2/authorize?client_id=AO7wf24CFswJeX6UmaKdbRcJ1uhMJaoh&redirect_uri=https://kurtkanaskie.github.io/oidc-implicit-customers/callback.html&response_type=token+id_token&state=A&scope=openid+profile&nonce=" + Date.now();
-    $scope.login = function() {
-        window.location.href = url;
-    }
- 
-});
- 
 app.controller("SecureController", function($scope) {
  
     $scope.accessToken = JSON.parse(window.localStorage.getItem("oidc")).oauth.access_token;
@@ -52,12 +38,16 @@ app.controller("SecureController", function($scope) {
 
 app.controller("CustomersController", function($scope, $http) {
  
-    $scope.accessToken = JSON.parse(window.localStorage.getItem("oidc")).oauth.access_token;
+    var token = JSON.parse(window.localStorage.getItem("oidc")).oauth.access_token;
+    $scope.accessToken = token;
+
+    // url : "https://apibaas-trial.apigee.net/kurtkanaskie/sandbox/customers"
 
 	$http({
+        headers: {"Authorization":"Bearer " + token},
         method : "GET",
-        url : "https://apibaas-trial.apigee.net/kurtkanaskie/sandbox/customers"
-    }).then(function mySucces(response) {
+        url : "https://tmobileh-sb05.apigee.net/atwork/v5/customers"
+    }).then(function mySuccess(response) {
       $scope.message = "OK";
       $scope.status = response.status;
       $scope.customers = response.data.entities;
