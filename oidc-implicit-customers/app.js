@@ -34,9 +34,12 @@ app.controller("CustomersController", function($scope, $http) {
         method : "GET",
         url : "https://tmobileh-sb05.apigee.net/atwork/v5/customers"
     }).then(function mySuccess(response) {
+      $scope.status = response.status;
+      $scope.message = "OK";
       $scope.customers = response.data.entities;
     }, function myError(response) {
-	  alert("Uh oh" + response.status);
+      $scope.status = response.status;
+      $scope.message = response.data;
       $scope.customers = [];
     });
  
