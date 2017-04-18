@@ -45,7 +45,7 @@ app.controller("HomeController", function($scope) {
 app.controller("CustomersController", function($scope, $http) {
  
 	var oidc = window.localStorage.getItem("oidc");
-	if( oidc === null ) {
+	if( oidc === null || oidc == "" ) {
 		console.log( "not log in" );
 		  $scope.status = 401;
 		  $scope.message = "You are not logged in";
