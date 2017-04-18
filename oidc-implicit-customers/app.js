@@ -44,7 +44,7 @@ app.controller("CustomersController", function($scope, $http) {
       $scope.customers = response.data.entities;
     }, function (response) {
       $scope.status = "Error";
-      $scope.message = response.data;
+      $scope.message = JSON.stringify(response.data);
       $scope.customers = [];
     });
  
