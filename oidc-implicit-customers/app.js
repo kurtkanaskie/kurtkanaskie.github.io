@@ -7,11 +7,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
             templateUrl: 'home.html',
             controller: 'HomeController'
         })
-        .state('secure', {
-            url: '/secure',
-            templateUrl: 'secure.html',
-            controller: 'SecureController'
-        })
         .state('customers', {
             url: '/customers',
             templateUrl: 'customers.html',
@@ -30,30 +25,18 @@ app.controller("HomeController", function($scope) {
  
 });
 
-app.controller("SecureController", function($scope) {
- 
-    $scope.accessToken = JSON.parse(window.localStorage.getItem("oidc")).oauth.access_token;
- 
-});
-
 app.controller("CustomersController", function($scope, $http) {
  
     var token = JSON.parse(window.localStorage.getItem("oidc")).oauth.access_token;
-    $scope.accessToken = token;
-
-    // url : "https://apibaas-trial.apigee.net/kurtkanaskie/sandbox/customers"
 
 	$http({
         headers: {"Authorization":"Bearer " + token},
         method : "GET",
         url : "https://tmobileh-sb05.apigee.net/atwork/v5/customers"
     }).then(function mySuccess(response) {
-      $scope.message = "OK";
-      $scope.status = response.status;
       $scope.customers = response.data.entities;
     }, function myError(response) {
-      $scope.message = "Uh oh";
-      $scope.status = response.status;
+	  alert("Uh oh" + response.status);
       $scope.customers = [];
     });
  
