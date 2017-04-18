@@ -37,7 +37,7 @@ app.controller("HomeController", function($scope) {
     }
 
 	$scope.signedIn = window.localStorage.getItem("signedIn");
-	console.log( "SIGNED IN: " + $scope.signedIn + " done" );
+	console.log( "SIGNED IN: " + $scope.signedIn );
 
  
 });
@@ -51,12 +51,12 @@ app.controller("CustomersController", function($scope, $http) {
         method : "GET",
         url : "https://tmobileh-sb05.apigee.net/atwork/v5/customers"
     }).then(function (response) {
-		console.log( "Customers OK: " + response.status + response.data );
+		console.log( "Customers OK: " + response.status + JSON.stringify(response.data) );
       $scope.status = response.status;
       $scope.message = "OK";
       $scope.customers = response.data.entities;
     }, function (response) {
-		console.log( "Customers ERROR: " + response.status + response.data );
+		console.log( "Customers ERROR: " + response.status + JSON.stringify(response.data) );
       $scope.status = response.status;
       $scope.message = JSON.stringify(response.data);
       $scope.customers = [];
