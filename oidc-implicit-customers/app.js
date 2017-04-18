@@ -31,7 +31,7 @@ app.controller("HomeController", function($scope) {
     }
     $scope.logout = function() {
 		window.localStorage.setItem("signedIn", "not ");
-		window.localStorage.setItem("oidc", "");
+		window.localStorage.setItem("oidc", null);
 		window.location.href = "https://kurtkanaskie.github.io/oidc-implicit-customers/index.html#/home";
 		console.log( "log out" );
     }
@@ -46,20 +46,27 @@ app.controller("CustomersController", function($scope, $http) {
  
     var token = JSON.parse(window.localStorage.getItem("oidc")).oauth.access_token;
 
-	$http({
-        headers: {"Authorization":"Bearer " + token},
-        method : "GET",
-        url : "https://tmobileh-sb05.apigee.net/atwork/v5/customers"
-    }).then(function (response) {
-		console.log( "Customers OK: " + response.status + JSON.stringify(response.data) );
-      $scope.status = response.status;
-      $scope.message = "OK";
-      $scope.customers = response.data.entities;
-    }, function (response) {
-		console.log( "Customers ERROR: " + response.status + JSON.stringify(response.data) );
-      $scope.status = response.status;
-      $scope.message = JSON.stringify(response.data);
-      $scope.customers = [];
-    });
+	var oidc = window.localStorage.getItem("oidc");
+	if( oidc === null ) {
+		console.log( "not log in" );
+		  $scope.status = 401;
+		  $scope.message = "You are not logged in";
+	} else {
+		$http({
+			headers: {"Authorization":"Bearer " + token},
+			method : "GET",
+			url : "https://tmobileh-sb05.apigee.net/atwork/v5/customers"
+		}).then(function (response) {
+			console.log( "Customers OK: " + response.status + JSON.stringify(response.data) );
+		  $scope.status = response.status;
+		  $scope.message = "OK";
+		  $scope.customers = response.data.entities;
+		}, function (response) {
+			console.log( "Customers ERROR: " + response.status + JSON.stringify(response.data) );
+		  $scope.status = response.status;
+		  $scope.message = JSON.stringify(response.data);
+		  $scope.customers = [];
+		});
+	}
  
 });
