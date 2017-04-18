@@ -21,6 +21,7 @@ app.controller("HomeController", function($scope, $state, $window) {
 	$scope.authorize = url;
 
 	var signedIn = $window.localStorage.getItem("signedIn");
+	console.log( "signedIn is: =" + signedIn + "=" );
 	if( signedIn == "null" || signedIn === null || signedIn == "" ) {
 		$window.localStorage.setItem("signedIn", "not ");
 		console.log( "signedIn: " + signedIn );
