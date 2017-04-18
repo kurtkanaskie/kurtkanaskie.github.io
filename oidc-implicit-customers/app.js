@@ -44,14 +44,15 @@ app.controller("HomeController", function($scope) {
 
 app.controller("CustomersController", function($scope, $http) {
  
-    var token = JSON.parse(window.localStorage.getItem("oidc")).oauth.access_token;
-
 	var oidc = window.localStorage.getItem("oidc");
 	if( oidc === null ) {
 		console.log( "not log in" );
 		  $scope.status = 401;
 		  $scope.message = "You are not logged in";
 	} else {
+
+    	var token = JSON.parse(window.localStorage.getItem("oidc")).oauth.access_token;
+
 		$http({
 			headers: {"Authorization":"Bearer " + token},
 			method : "GET",
