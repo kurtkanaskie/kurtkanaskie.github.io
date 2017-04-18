@@ -45,7 +45,7 @@ app.controller("HomeController", function($scope, $state, $window) {
 app.controller("CustomersController", function($scope, $http, $window) {
  
 	var oidc = $window.localStorage.getItem("oidc");
-	console.log( "CustomersController =" + oidc + "=" );
+	console.log( "CustomersController is =" + oidc + "=" );
 	if( oidc == null || oidc === null || oidc == "" ) {
 		console.log( "not log in" );
 		  $scope.status = 401;
