@@ -21,18 +21,18 @@ app.controller("HomeController", function($scope) {
 	$scope.authorize = url;
 
 	var signedIn = window.localStorage.getItem("signedIn");
-	if( !signedIn ) {
+	if( signedIn === null || signedIn == "" ) {
 		window.localStorage.setItem("signedIn", "not ");
 	}
 
     $scope.login = function() {
-        window.location.href = url;
 		console.log( "log in" );
+        window.location.href = url;
     }
     $scope.logout = function() {
 		window.localStorage.setItem("signedIn", "not ");
 		window.localStorage.setItem("oidc", null);
-		window.location.href = "https://kurtkanaskie.github.io/oidc-implicit-customers/index.html#/home";
+		window.location.reload();
 		console.log( "log out" );
     }
 
@@ -45,6 +45,7 @@ app.controller("HomeController", function($scope) {
 app.controller("CustomersController", function($scope, $http) {
  
 	var oidc = window.localStorage.getItem("oidc");
+	console.log( "CustomersController =" + oidc +'=" );
 	if( oidc === null || oidc == "" ) {
 		console.log( "not log in" );
 		  $scope.status = 401;
