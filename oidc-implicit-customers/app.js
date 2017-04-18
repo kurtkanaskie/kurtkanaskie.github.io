@@ -31,7 +31,7 @@ app.controller("HomeController", function($scope, $state) {
     }
     $scope.logout = function() {
 		window.localStorage.setItem("signedIn", "not ");
-		window.localStorage.setItem("oidc", null);
+		window.localStorage.setItem("oidc", "");
 		$state.reload();
 		console.log( "log out" );
     }
