@@ -21,7 +21,7 @@ app.controller("HomeController", function($scope, $state, $window) {
 	$scope.authorize = url;
 
 	var signedIn = $window.localStorage.getItem("signedIn");
-	if( signedIn === null || signedIn == "" ) {
+	if( signedIn == "null" || signedIn === null || signedIn == "" ) {
 		$window.localStorage.setItem("signedIn", "not ");
 		console.log( "signedIn: " + signedIn );
 	}
@@ -46,7 +46,7 @@ app.controller("HomeController", function($scope, $state, $window) {
 app.controller("CustomersController", function($scope, $http, $window) {
  
 	var oidc = $window.localStorage.getItem("oidc");
-	console.log( "CustomersController is =" + oidc + "=" );
+	console.log( "CustomersController oidc =" + oidc + "=" );
 	if( oidc == "null" || oidc === null || oidc == "" ) {
 		console.log( "not log in" );
 		  $scope.status = 401;
