@@ -42,7 +42,7 @@ app.controller("HomeController", function($scope, $state, $window) {
  
 });
 
-app.controller("CustomersController", function($scope, $http) {
+app.controller("CustomersController", function($scope, $http, $window) {
  
 	var oidc = $window.localStorage.getItem("oidc");
 	console.log( "CustomersController =" + oidc + "=" );
