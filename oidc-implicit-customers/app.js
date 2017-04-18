@@ -2,10 +2,10 @@ var app = angular.module("app", ['ui.router']);
  
 app.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
-        .state('login', {
-            url: '/login',
-            templateUrl: 'login.html',
-            controller: 'LoginController'
+        .state('home', {
+            url: '/home',
+            templateUrl: 'home.html',
+            controller: 'HomeController'
         })
         .state('secure', {
             url: '/secure',
@@ -17,10 +17,10 @@ app.config(function($stateProvider, $urlRouterProvider) {
             templateUrl: 'customers.html',
             controller: 'CustomersController'
         });
-    $urlRouterProvider.otherwise('/login');
+    $urlRouterProvider.otherwise('/home');
 });
  
-app.controller("LoginController", function($scope) {
+app.controller("HomeController", function($scope) {
  
 	var url = "https://tmobileh-sb05.apigee.net/oidc-core/oauth2/authorize?client_id=AO7wf24CFswJeX6UmaKdbRcJ1uhMJaoh&redirect_uri=https://kurtkanaskie.github.io/oidc-implicit-customers/callback.html&response_type=token+id_token&state=A&scope=openid+profile&nonce=" + Date.now();
     $scope.login = function() {
