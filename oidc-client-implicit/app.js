@@ -17,17 +17,17 @@ app.config(function($stateProvider, $urlRouterProvider) {
  
 app.controller("HomeController", function($scope, $state, $window) {
  
-    var url = "https://tmobileh-sb05.apigee.net/oidc-core/oauth2/authorize" 
+    var url = $window.location.href;
+    var redirect = url.substring(0,url.lastIndexOf('/')) + "/callback.html";
+    var authorize = "https://tmobileh-sb05.apigee.net/oidc-core/oauth2/authorize" 
 		+ "?client_id=AO7wf24CFswJeX6UmaKdbRcJ1uhMJaoh"
-		+ "&redirect_uri=https://kurtkanaskie.github.io/oidc-client-implicit/callback.html"
+		+ "&redirect_uri=" + redirect
 		+ "&response_type=token+id_token"
 		+ "&state=A"
 		+ "&scope=openid+profile&nonce=" + Date.now();
 
-		console.log( "Home URI: " + $window.location.href );
-
     $scope.login = function() {
-        $window.location.href = url;
+        $window.location.href = authorize;
     }
     $scope.logout = function() {
         $window.localStorage.setItem("oidc", "");
@@ -57,16 +57,16 @@ app.controller("CustomersController", function($scope, $http, $window) {
         $http({
             headers: {"Authorization":"Bearer " + token},
             method : "GET",
-            url : "https://tmobileh-sb05.apigee.net/atwork/v5/customers"
-        }).then(function (response) {
+            url : "https://tmobileh-sb05.apigee.net/atwork/v5/customersX"
+        }).then(function successCallback(response) {
           // console.log( "Customers OK: " + response.status + JSON.stringify(response.data) );
           $scope.status = response.status;
           $scope.message = "OK";
           $scope.customers = response.data.entities;
-        }, function (response) {
-          // console.log( "Customers ERROR: " + response.status + JSON.stringify(response.data) );
+        }, function errorCallback(response) {
+          console.log( "Customers ERROR: " + response.status + " - " + response.statusText + " - " + JSON.stringify(response.data) );
           $scope.status = response.status;
-          $scope.message = JSON.stringify(response.data);
+          $scope.message = JSON.stringify(error.data);
           $scope.customers = [];
         });
     }
