@@ -24,9 +24,6 @@ app.controller("HomeController", function($scope, $state, $window) {
 		+ "&state=A"
 		+ "&scope=openid+profile&nonce=" + Date.now();
 
-	// This is used if we want to use a simple href instead of button
-    $scope.authorize = url;
-
     $scope.login = function() {
         $window.location.href = url;
     }
