@@ -28,17 +28,13 @@ app.controller("HomeController", function($scope, $state, $window) {
         $window.location.href = url;
     }
     $scope.logout = function() {
-        console.log("logged out");
-        $scope.inOrOut = "out.";
         $window.localStorage.setItem("oidc", "");
         $state.reload();
     }
 
     var oidc = $window.localStorage.getItem("oidc");
-    console.log('oidc: "' + oidc + '"');
     if( oidc === null || oidc === "" ) {
         $scope.inOrOut = "out";
-        console.log("initially out");
     } else {
 		$scope.inOrOut = "in";
 	}
