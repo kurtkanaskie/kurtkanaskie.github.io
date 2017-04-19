@@ -15,6 +15,7 @@ callback: https://kurtkanaskie.github.io/oidc-client-implicit/callback.html
             for(var i = 0; i < responseParameters.length; i++) {
                 parameterMap[responseParameters[i].split("=")[0]] = responseParameters[i].split("=")[1];
             }
+            console.log( "Callback access_token: " + parameterMap.access_token );
             if(parameterMap.access_token !== undefined && parameterMap.access_token !== null) {
                 var oidc = {
                     oauth: {
@@ -30,6 +31,7 @@ callback: https://kurtkanaskie.github.io/oidc-client-implicit/callback.html
 				// console.log( "Callback: url: " + url + " redirect: " + redirect);
 				window.location.href = redirect;
             } else {
+				console.log( "Callback error: " + parameterMap.error );
                 window.localStorage.setItem("oidc", "");
                 alert("Problem authenticating");
             }
