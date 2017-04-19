@@ -1,5 +1,5 @@
 <h2> OIDC Demo Client Implicit Flow </h2>
 <p>You are {{signedIn}}signed in</p>
 <button ng-click="login()">Login</button> <button ng-click="logout()">Logout</button>
-<p><a href="{{authorize}}"> Sign In</a> --- <a href="javascript:logout()">Sign Out</a>
+<p><a href="{{authorize}}"> Sign In</a> --- <a href="#/home" onclick="logout()">Sign Out</a>
 <p><a href="#/customers"> View Customers</a></p>
