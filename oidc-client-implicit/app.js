@@ -26,7 +26,7 @@ app.controller("HomeController", function($scope, $state, $window) {
 		+ "&state=A"
 		+ "&scope=openid+profile&nonce=" + Date.now();
 
-	console.log( "URL: " + url + " REDIRECT: " + redirect + " AUTHORIZE: " + authorize );
+	// console.log( "URL: " + url + " REDIRECT: " + redirect + " AUTHORIZE: " + authorize );
     $scope.login = function() {
         $window.location.href = authorize;
     }
@@ -67,7 +67,7 @@ app.controller("CustomersController", function($scope, $http, $window) {
         }, function errorCallback(response) {
           console.log( "Customers ERROR: " + response.status + " - " + response.statusText + " - " + JSON.stringify(response.data) );
           $scope.status = response.status;
-          $scope.message = JSON.stringify(error.data);
+          $scope.message = JSON.stringify(response.data);
           $scope.customers = [];
         });
     }
