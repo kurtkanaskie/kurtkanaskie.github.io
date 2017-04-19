@@ -67,15 +67,7 @@ app.controller("CustomersController", function($scope, $http, $window) {
         }, function errorCallback(response) {
           console.log( "Customers ERROR: " + response.status + " - " + response.statusText + " - " + JSON.stringify(response.data) );
           $scope.status = response.status;
-		  switch( response.status ) {
-		  	case 401: 
-				$scope.message = "Unauthorized, check token";
-		  	case 405: 
-				$scope.message = "Method and/or path not allowed";
-			default: 
-				$scope.message = "Unknown error";
-		  }
-          $scope.message = JSON.stringify(response.data);
+          $scope.message = response.statusText
           $scope.customers = [];
         });
     }
