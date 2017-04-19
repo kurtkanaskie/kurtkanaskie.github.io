@@ -28,7 +28,7 @@ app.controller("HomeController", function($scope, $state, $window) {
         $window.location.href = url;
     }
     $scope.logout = function() {
-        $window.localStorage.setItem("inOrOut", "out");
+        $scope.inOrOut = "out.";
         $window.localStorage.setItem("oidc", "");
         $state.reload();
     }
@@ -36,11 +36,11 @@ app.controller("HomeController", function($scope, $state, $window) {
     var inOrOut = $window.localStorage.getItem("inOrOut");
     console.log('inOrOut: "' + inOrOut + '"');
     if( inOrOut === null || inOrOut === "null" || inOrOut === "" ) {
-        $window.localStorage.setItem("inOrOut", "out");
+        $scope.inOrOut = "out";
         console.log("initially out");
-    }
-
-    $scope.inOrOut = $window.localStorage.getItem("inOrOut");
+    } else {
+		$scope.inOrOut = "in";
+	}
  
 });
 
