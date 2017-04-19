@@ -19,10 +19,12 @@ app.controller("HomeController", function($scope, $state, $window) {
  
     var url = "https://tmobileh-sb05.apigee.net/oidc-core/oauth2/authorize" 
 		+ "?client_id=AO7wf24CFswJeX6UmaKdbRcJ1uhMJaoh"
-		+ "&redirect_uri=https://kurtkanaskie.github.io/oidc-implicit-customers/callback.html"
+		+ "&redirect_uri=https://kurtkanaskie.github.io/oidc-client-implicit/callback.html"
 		+ "&response_type=token+id_token"
 		+ "&state=A"
 		+ "&scope=openid+profile&nonce=" + Date.now();
+
+		console.log( "Home URI: " + $window.location.href );
 
     $scope.login = function() {
         $window.location.href = url;
