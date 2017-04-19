@@ -26,6 +26,7 @@ app.controller("HomeController", function($scope, $state, $window) {
 		+ "&state=A"
 		+ "&scope=openid+profile&nonce=" + Date.now();
 
+	console.log( "URL: " + url + " REDIRECT: " + redirect );
     $scope.login = function() {
         $window.location.href = authorize;
     }
