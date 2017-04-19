@@ -35,7 +35,7 @@ app.controller("HomeController", function($scope, $state, $window) {
 
     var inOrOut = $window.localStorage.getItem("inOrOut");
     console.log('inOrOut: "' + inOrOut + '"');
-    if( inOrOut === "" ) {
+    if( inOrOut === "null" || inOrOut === "" ) {
         $window.localStorage.setItem("inOrOut", "out");
         console.log("initially out");
     }
@@ -47,8 +47,8 @@ app.controller("HomeController", function($scope, $state, $window) {
 app.controller("CustomersController", function($scope, $http, $window) {
  
     var oidc = $window.localStorage.getItem("oidc");
-    // local storage can only hold strings, don't use null
-    if( oidc === "" ) {
+    // local storage can only hold strings, if not set "null"
+    if( oidc === "null" || oidc === "" ) {
           $scope.status = 401;
           $scope.message = "You are not logged in";
     } else {
