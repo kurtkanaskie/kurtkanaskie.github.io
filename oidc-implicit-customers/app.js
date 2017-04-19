@@ -34,8 +34,10 @@ app.controller("HomeController", function($scope, $state, $window) {
     }
 
     var inOrOut = $window.localStorage.getItem("inOrOut");
+    console.log('inOrOut: "' + inOrOut + '"');
     if( inOrOut === "" ) {
-        $window.localStorage.setItem("inOrOut", "out ");
+        $window.localStorage.setItem("inOrOut", "out");
+        console.log("initially out");
     }
 
     $scope.inOrOut = $window.localStorage.getItem("inOrOut");
