@@ -27,7 +27,10 @@ callback: https://kurtkanaskie.github.io/oidc-implicit-customers/
                 window.localStorage.setItem("signedIn", "now ");
                 window.localStorage.setItem("oidc", JSON.stringify(oidc));
                 // window.location.href = "https://kurtkanaskie.github.io/oidc-implicit-customers/index.html#/home";
-                window.location.href = "#/home";
+				var url = window.location.href;
+				var redirect = url.substring(0,url.lastIndexOf('/')) + "/index.html#/home";
+				console.log( "Callback: url: " + url + " redirect: " + redirect);
+				window.location.href = redirect;
             } else {
                 window.localStorage.setItem("signedIn", "not ");
                 window.localStorage.setItem("oidc", "");
