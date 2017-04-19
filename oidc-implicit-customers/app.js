@@ -28,17 +28,17 @@ app.controller("HomeController", function($scope, $state, $window) {
         $window.location.href = url;
     }
     $scope.logout = function() {
-        $window.localStorage.setItem("signedIn", "not ");
+        $window.localStorage.setItem("inOrOut", "out");
         $window.localStorage.setItem("oidc", "");
         $state.reload();
     }
 
-    var signedIn = $window.localStorage.getItem("signedIn");
-    if( signedIn === "" ) {
-        $window.localStorage.setItem("signedIn", "not ");
+    var inOrOut = $window.localStorage.getItem("inOrOut");
+    if( inOrOut === "" ) {
+        $window.localStorage.setItem("inOrOut", "out ");
     }
 
-    $scope.signedIn = $window.localStorage.getItem("signedIn");
+    $scope.inOrOut = $window.localStorage.getItem("inOrOut");
  
 });
 

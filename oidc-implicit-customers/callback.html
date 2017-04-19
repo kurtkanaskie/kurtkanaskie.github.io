@@ -24,14 +24,14 @@ callback: https://kurtkanaskie.github.io/oidc-implicit-customers/callback.html
                         token_type: parameterMap.token_type
                     }
                 };
-                window.localStorage.setItem("signedIn", "now ");
+                window.localStorage.setItem("inOrOut", "in");
                 window.localStorage.setItem("oidc", JSON.stringify(oidc));
 				var url = window.location.href;
 				var redirect = url.substring(0,url.lastIndexOf('/')) + "/index.html#/home";
 				// console.log( "Callback: url: " + url + " redirect: " + redirect);
 				window.location.href = redirect;
             } else {
-                window.localStorage.setItem("signedIn", "not ");
+                window.localStorage.setItem("inOrOut", "out");
                 window.localStorage.setItem("oidc", "");
                 alert("Problem authenticating");
             }
