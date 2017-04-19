@@ -58,14 +58,14 @@ app.controller("CustomersController", function($scope, $http, $window) {
         $http({
             headers: {"Authorization":"Bearer " + token},
             method : "GET",
-            url : "https://tmobileh-sb05.apigee.net/atwork/v5/customersX"
+            url : "https://tmobileh-sb05.apigee.net/atwork/v5/customers"
         }).then(function successCallback(response) {
           // console.log( "Customers OK: " + response.status + JSON.stringify(response.data) );
           $scope.status = response.status;
           $scope.message = "OK";
           $scope.customers = response.data.entities;
         }, function errorCallback(response) {
-          console.log( "Customers ERROR: " + response.status + " - " + response.statusText + " - " + JSON.stringify(response.data) );
+          // console.log( "Customers ERROR: " + response.status + " - " + response.statusText + " - " + JSON.stringify(response.data) );
           $scope.status = response.status;
           $scope.message = response.statusText
           $scope.customers = [];
