@@ -28,6 +28,7 @@ app.controller("HomeController", function($scope, $state, $window) {
         $window.location.href = url;
     }
     $scope.logout = function() {
+        console.log("logged out");
         $scope.inOrOut = "out.";
         $window.localStorage.setItem("oidc", "");
         $state.reload();
