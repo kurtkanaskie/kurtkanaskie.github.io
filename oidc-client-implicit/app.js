@@ -18,7 +18,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 app.controller("HomeController", function($scope, $state, $window) {
  
     var url = $window.location.href;
-    var redirect = url.substring(0,url.lastIndexOf('/')) + "/callback.html";
+    var redirect = url.replace("index.html#/home","callback.html");
     var authorize = "https://tmobileh-sb05.apigee.net/oidc-core/oauth2/authorize" 
 		+ "?client_id=AO7wf24CFswJeX6UmaKdbRcJ1uhMJaoh"
 		+ "&redirect_uri=" + redirect
@@ -26,7 +26,7 @@ app.controller("HomeController", function($scope, $state, $window) {
 		+ "&state=A"
 		+ "&scope=openid+profile&nonce=" + Date.now();
 
-	console.log( "URL: " + url + " REDIRECT: " + redirect );
+	console.log( "URL: " + url + " REDIRECT: " + redirect + " AUTHORIZE: " + authorize );
     $scope.login = function() {
         $window.location.href = authorize;
     }
