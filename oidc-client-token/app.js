@@ -21,13 +21,13 @@ app.controller("HomeController", function($scope, $state, $window) {
     var redirect = url.replace("index.html#/home","callback.html");
 	// This is the OIDC-core App
     var authorize = "https://wec-nonprod-dev.apigee.net/oidc-core/oauth2/authorize" 
-		+ "?client_id=AO7wf24CFswJeX6UmaKdbRcJ1uhMJaoh"
+		+ "?client_id=SL6ruSDcwaxoECLTgvpRIb2UwVVGAr4W"
 		+ "&redirect_uri=" + redirect
 		+ "&response_type=token+id_token"
 		+ "&state=A"
 		+ "&scope=openid+profile&nonce=" + Date.now();
 
-	// console.log( "URL: " + url + " REDIRECT: " + redirect + " AUTHORIZE: " + authorize );
+	console.log( "URL: " + url + " REDIRECT: " + redirect + " AUTHORIZE: " + authorize );
     $scope.login = function() {
         $window.location.href = authorize;
     }
