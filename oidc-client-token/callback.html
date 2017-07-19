@@ -1,0 +1,49 @@
+<html>
+    <head>
+        <script>
+/*
+callback: https://kurtkanaskie.github.io/oidc-client-implicit/callback.html
+    #state=A
+    &id_token=eyJhbGciOi...
+    &access_token=mPqpPz5tGjme1gd0Am6UA9n93HLl
+    &expires=599
+    &token_type=Bearer
+*/
+            var callback = document.URL;
+            if( callback.includes("#") ) { // OK
+                var callbackResponse = callback.split("#")[1];
+            } else { // error
+                var callbackResponse = callback.split("?")[1];
+            }
+            var responseParameters = (callbackResponse).split("&");
+            var parameterMap = [];
+            for(var i = 0; i < responseParameters.length; i++) {
+                parameterMap[responseParameters[i].split("=")[0]] = responseParameters[i].split("=")[1];
+            }
+            // console.log( "Callback access_token: " + parameterMap.access_token );
+
+            if(parameterMap.access_token !== undefined && parameterMap.access_token !== null) {
+                var oidc = {
+                    oauth: {
+                        id_token: parameterMap.id_token,
+                        access_token: parameterMap.access_token,
+                        expires: parameterMap.expires,
+                        token_type: parameterMap.token_type
+                    }
+                };
+                window.localStorage.setItem("oidc", JSON.stringify(oidc));
+				// console.log( "Callback: url: " + url + " redirect: " + redirect);
+            } else {
+				// console.log( "Callback error: " + parameterMap.error );
+                window.localStorage.setItem("oidc", "");
+                alert("Problem authenticating");
+            }
+
+            var url = window.location.href;
+            var redirect = url.substring(0,url.lastIndexOf('/')) + "/index.html#/home";
+            window.location.href = redirect;
+
+        </script>
+    </head>
+    <body>Redirecting...</body>
+</html>
