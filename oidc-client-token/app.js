@@ -59,7 +59,7 @@ app.controller("CustomersController", function($scope, $http, $window) {
         $http({
             headers: {"Authorization":"Bearer " + token},
             method : "GET",
-            url : "https://wec-nonprod-dev.apigee.net/atwork/v5/customers"
+            url : "https://wec-nonprod-dev.apigee.net/v1/customers"
         }).then(function successCallback(response) {
           // console.log( "Customers OK: " + response.status + JSON.stringify(response.data) );
           $scope.status = response.status;
