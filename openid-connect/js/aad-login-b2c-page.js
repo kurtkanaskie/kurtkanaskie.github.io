@@ -15,6 +15,7 @@ var model = {
       nonce : '',
       rtype : [],
       scope : [],
+      foo : [],
       profile : [],
       prompt : []
     };
@@ -68,6 +69,15 @@ $(document).ready(function() {
     no_results_text: "No matching scopes...",
     allow_single_deselect: true
   });
+  $('.profile-chosen').chosen({
+    no_results_text: "No matching response types...",
+    allow_single_deselect: true
+  });
+  $('.prompt-chosen').chosen({
+    no_results_text: "No matching response types...",
+    allow_single_deselect: true
+  });
+  
 
 
   $( "form input[type='text']" ).change(onInputChanged);
