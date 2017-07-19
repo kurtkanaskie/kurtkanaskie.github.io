@@ -64,7 +64,7 @@ app.controller("CustomersController", function($scope, $http, $window) {
           // console.log( "Customers OK: " + response.status + JSON.stringify(response.data) );
           $scope.status = response.status;
           $scope.message = "OK";
-          $scope.customers = response.data.entities;
+          $scope.customers = response.data.customers;
         }, function errorCallback(response) {
           // console.log( "Customers ERROR: " + response.status + " - " + response.statusText + " - " + JSON.stringify(response.data) );
           $scope.status = response.status;
