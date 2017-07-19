@@ -21,7 +21,8 @@ callback: https://kurtkanaskie.github.io/oidc-client-token/callback.html
             for(var i = 0; i < responseParameters.length; i++) {
                 parameterMap[responseParameters[i].split("=")[0]] = responseParameters[i].split("=")[1];
             }
-            // console.log( "Callback access_token: " + parameterMap.access_token );
+            console.log( "Callback access_token: " + parameterMap.access_token );
+            console.log( "Callback id_token: " + parameterMap.id_token );
 
             if(parameterMap.access_token !== undefined && parameterMap.access_token !== null) {
                 var oidc = {
@@ -33,15 +34,16 @@ callback: https://kurtkanaskie.github.io/oidc-client-token/callback.html
                     }
                 };
                 window.localStorage.setItem("oidc", JSON.stringify(oidc));
-				console.log( "Callback: url: " + url + " redirect: " + redirect);
+		console.log( "OIDC: " + JSON.stringify(oidc));
             } else {
-				// console.log( "Callback error: " + parameterMap.error );
+	    console.log( "Callback error: " + parameterMap.error );
                 window.localStorage.setItem("oidc", "");
                 alert("Problem authenticating");
             }
 
             var url = window.location.href;
             var redirect = url.substring(0,url.lastIndexOf('/')) + "/index.html#/home";
+            console.log( "Callback and Redirect: " + url + " redirect: " + redirect);
             window.location.href = redirect;
 
         </script>
