@@ -1,12 +1,15 @@
 <p>{{status}} - {{message}}</p>
+	<!--
 	<br>
 		Search among the results:
 	</br>
 	<br/>
 		<input type="text" ng-model="personFullName" />
 	<br/>
+	-->
 	<ul>
-		<li ng-repeat="customer in customers | filter:personFullName">{{customer.personFullName}}, {{customer.company}}</li>
+		<!-- <li ng-repeat="customer in customers | filter:personFullName">{{customer.personFullName}}, {{customer.company}}</li> -->
+		<li ng-repeat="customer in customers">{{customer.personFullName}}</li>
 	</ul>
 
 	<a href="#/home"> Back</a>
