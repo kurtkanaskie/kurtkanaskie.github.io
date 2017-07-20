@@ -15,13 +15,12 @@ var model = {
       nonce : '',
       rtype : [],
       scope : [],
-      foo : [],
       profile : [],
       prompt : []
     };
 
 function updateLink() {
-  var linkTemplate = "${baseloginurl}?client_id=${clientid}&redirect_uri=${cburi}&response_type=${rtype}&state=${state}&scope=${scope}&nonce=${nonce}&profile=${profile}&prompt=${prompt}";
+  var linkTemplate = "${baseloginurl}?client_id=${clientid}&redirect_uri=${cburi}&response_type=${rtype}&state=${state}&scope=${scope}&nonce=${nonce}&p=${profile}&prompt=${prompt}";
   Object.keys(model).forEach(function(key) {
     var pattern = "${" + key + "}", value = '';
     if (model[key]) {
