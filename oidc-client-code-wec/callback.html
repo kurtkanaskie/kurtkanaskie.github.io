@@ -10,7 +10,7 @@ callback: https://kurtkanaskie.github.io/oidc-client-token/callback.html
     &token_type=Bearer
 */
             var callback = document.URL;
-            console.log("Callback URL: " + callback);
+            console.log("Code Callback URL: " + callback);
             if( callback.includes("#") ) { // OK
                 var callbackResponse = callback.split("#")[1];
             } else { // error
