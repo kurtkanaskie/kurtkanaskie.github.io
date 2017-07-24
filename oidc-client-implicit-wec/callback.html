@@ -34,9 +34,9 @@ callback: https://kurtkanaskie.github.io/oidc-client-token/callback.html
                     }
                 };
                 window.localStorage.setItem("oidc", JSON.stringify(oidc));
-		console.log( "OIDC: " + JSON.stringify(oidc));
+				console.log( "OIDC: " + JSON.stringify(oidc));
             } else {
-	    console.log( "Callback error: " + parameterMap.error );
+	    		console.log( "Callback error: " + parameterMap.error );
                 window.localStorage.setItem("oidc", "");
                 alert("Problem authenticating");
             }
