@@ -24,7 +24,7 @@ app.controller("HomeController", function($scope, $state, $window) {
     var authorize = "https://wec-nonprod-dev.apigee.net/azure-b2c/authorize" 
 		+ "?client_id=va4eEe5eanreAbmnACAa9xcvA95G1rSv"
 		+ "&redirect_uri=" + redirect
-		+ "&response_type=token+id_token"
+		+ "&response_type=code"
 		+ "&state=A"
 		+ "&scope=openid+profile&nonce=" + Date.now();
 

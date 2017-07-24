@@ -19,11 +19,12 @@ app.controller("HomeController", function($scope, $state, $window) {
  
     var url = $window.location.href;
     var redirect = url.replace("index.html#/home","callback.html");
-	// This is the OIDC-core App
-    var authorize = "https://wec-nonprod-dev.apigee.net/oidc-core/oauth2/authorize" 
-		+ "?client_id=SL6ruSDcwaxoECLTgvpRIb2UwVVGAr4W"
+    // This is the OIDC-core app: SL6ruSDcwaxoECLTgvpRIb2UwVVGAr4W
+    // This is the Demo app: va4eEe5eanreAbmnACAa9xcvA95G1rSv
+    var authorize = "https://wec-nonprod-dev.apigee.net/azure-b2c/authorize" 
+		+ "?client_id=va4eEe5eanreAbmnACAa9xcvA95G1rSv"
 		+ "&redirect_uri=" + redirect
-		+ "&response_type=token+id_token"
+		+ "&response_type=id_token"
 		+ "&state=A"
 		+ "&scope=openid+profile&nonce=" + Date.now();
 
