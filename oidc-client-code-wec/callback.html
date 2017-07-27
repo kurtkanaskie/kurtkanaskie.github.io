@@ -17,7 +17,11 @@ callback: https://kurtkanaskie.github.io/oidc-client-code-wec/callback.html
             var responseParameters = (callbackResponse).split("&");
             var parameterMap = [];
             for(var i = 0; i < responseParameters.length; i++) {
-                parameterMap[responseParameters[i].split("=")[0]] = responseParameters[i].split("=")[1];
+                var paramName = responseParameters[i].split("=")[0];
+                var paramValue = responseParameters[i].split("=")[1];
+                if( paramValue === undefined || paramValue === null ) { paramValue = "NA"; }
+                consol.log( "Param: " + paramName + ":"paramValue );
+                parameterMap[paramName] = paramValue;
             }
             console.log( "Callback code: " + parameterMap.code );
             console.log( "Callback state: " + parameterMap.state );
