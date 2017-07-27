@@ -41,8 +41,8 @@ callback: https://kurtkanaskie.github.io/oidc-client-code-wec/callback.html
                 $http({
                     headers: {"Content-Type":"application/x-www-form-urlencoded"},
                     method : "POST",
-                    url : "https://wec-nonprod-dev.apigee.net/azure-b2c/token"
-                    data : fpdata;
+                    url : "https://wec-nonprod-dev.apigee.net/azure-b2c/token",
+                    data : fpdata
                 }).then(function successCallback(response) {
                   console.log( "POST /token OK: " + response.status + JSON.stringify(response.data) );
                   $scope.status = response.status;
