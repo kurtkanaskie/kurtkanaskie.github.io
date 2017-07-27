@@ -19,7 +19,7 @@ app.controller("HomeController", function($scope, $state, $window) {
  
     var url = $window.location.href;
     var redirect = url.replace("index.html#/home","callback.html");
-    // This is the DemoDemo-Azure-OIDC-Code app: va4eEe5eanreAbmnACAa9xcvA95G1rSv
+    // This is the DemoDemo-Azure-OIDC-Code app: wkDnvYG73mmiSCdJqkxZELfkzLZ7YqJu
     var authorize = "https://wec-nonprod-dev.apigee.net/azure-b2c/authorize" 
 		+ "?client_id=wkDnvYG73mmiSCdJqkxZELfkzLZ7YqJu"
 		+ "&redirect_uri=" + redirect
