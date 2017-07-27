@@ -2,12 +2,10 @@
     <head>
         <script>
 /*
-callback: https://kurtkanaskie.github.io/oidc-client-token/callback.html
-    #state=A
-    &id_token=eyJhbGciOi...
-    &access_token=mPqpPz5tGjme1gd0Am6UA9n93HLl
-    &expires=599
-    &token_type=Bearer
+callback: https://kurtkanaskie.github.io/oidc-client-code-wec/callback.html
+    ?code=eyJhbGciOi...
+    &state=A
+    &scope=
 */
             var callback = document.URL;
             console.log("Code Callback URL: " + callback);
@@ -21,20 +19,49 @@ callback: https://kurtkanaskie.github.io/oidc-client-token/callback.html
             for(var i = 0; i < responseParameters.length; i++) {
                 parameterMap[responseParameters[i].split("=")[0]] = responseParameters[i].split("=")[1];
             }
-            console.log( "Callback access_token: " + parameterMap.access_token );
-            console.log( "Callback id_token: " + parameterMap.id_token );
+            console.log( "Callback code: " + parameterMap.code );
+            console.log( "Callback state: " + parameterMap.state );
+            console.log( "Callback scope: " + parameterMap.scope );
 
-            if(parameterMap.access_token !== undefined && parameterMap.access_token !== null) {
-                var oidc = {
-                    oauth: {
-                        id_token: parameterMap.id_token,
-                        access_token: parameterMap.access_token,
-                        expires: parameterMap.expires,
-                        token_type: parameterMap.token_type
-                    }
+            if(parameterMap.code !== undefined && parameterMap.code !== null) {
+
+                var fpdata = { 
+                    client_id:'wkDnvYG73mmiSCdJqkxZELfkzLZ7YqJu',
+                    client_secret:'s9QFxne0ghxLLsnS',
+                    grant_type='authorization_code',
+                    code:parameterMap.code
                 };
-                window.localStorage.setItem("oidc", JSON.stringify(oidc));
-				console.log( "OIDC: " + JSON.stringify(oidc));
+
+                $http({
+                    headers: {"Content-Type":"application/x-www-form-urlencoded"},
+                    method : "POST",
+                    url : "https://wec-nonprod-dev.apigee.net/azure-b2c/token"
+                    data : fpdata;
+                }).then(function successCallback(response) {
+                  console.log( "POST /token OK: " + response.status + JSON.stringify(response.data) );
+                  $scope.status = response.status;
+                  $scope.message = "OK";
+                  $scope.tokenResponse = response.data;
+
+					var oidc = {
+						oauth: {
+							code: parameterMap.code,
+							state: parameterMap.state,
+							scope: parameterMap.scope,
+							access_token: response.data.access_token
+						}
+					};
+					window.localStorage.setItem("oidc", JSON.stringify(oidc));
+					console.log( "OIDC: " + JSON.stringify(oidc));
+                }, function errorCallback(response) {
+                  console.log( "POST /token ERROR: " + response.status + " - " + response.statusText + " - " + JSON.stringify(response.data) );
+                  $scope.status = response.status;
+                  $scope.message = response.statusText
+                  $scope.tokenResponse = {};
+					window.localStorage.setItem("oidc", "");
+					alert("Problem getting access_token");
+                });
+*
             } else {
 	    		console.log( "Callback error: " + parameterMap.error );
                 window.localStorage.setItem("oidc", "");
