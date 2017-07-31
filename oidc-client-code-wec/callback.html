@@ -29,45 +29,18 @@ callback: https://kurtkanaskie.github.io/oidc-client-code-wec/callback.html
 
             if(parameterMap.code !== undefined && parameterMap.code !== null) {
 
-                var fpdata = { 
-                    client_id:'wkDnvYG73mmiSCdJqkxZELfkzLZ7YqJu',
-                    client_secret:'s9QFxne0ghxLLsnS',
-                    grant_type:'authorization_code',
-                    code:parameterMap.code
-                };
-
 				console.log( "FPDATA: " + JSON.stringify(fpdata));
 
-                $http({
-                    headers: {"Content-Type":"application/x-www-form-urlencoded"},
-                    method : "POST",
-                    url : "https://wec-nonprod-dev.apigee.net/azure-b2c/token",
-                    data : fpdata
-                }).then(function successCallback(response) {
-                  console.log( "POST /token OK: " + response.status + JSON.stringify(response.data) );
-                  $scope.status = response.status;
-                  $scope.message = "OK";
-                  $scope.tokenResponse = response.data;
-
-					var oidc = {
-						oauth: {
-							code: parameterMap.code,
-							state: parameterMap.state,
-							scope: parameterMap.scope,
-							access_token: response.data.access_token
-						}
-					};
-					window.localStorage.setItem("oidc", JSON.stringify(oidc));
-					console.log( "OIDC: " + JSON.stringify(oidc));
-                }, function errorCallback(response) {
-                  console.log( "POST /token ERROR: " + response.status + " - " + response.statusText + " - " + JSON.stringify(response.data) );
-                  $scope.status = response.status;
-                  $scope.message = response.statusText
-                  $scope.tokenResponse = {};
-					window.localStorage.setItem("oidc", "");
-					alert("Problem getting access_token");
-                });
-
+                var oidc = {
+                    oauth: {
+                        code: parameterMap.code,
+                        state: parameterMap.state,
+                        scope: parameterMap.scope,
+                        access_token: response.data.access_token
+                    }
+                };
+                window.localStorage.setItem("oidc", JSON.stringify(oidc));
+                console.log( "OIDC CALLBACK: " + JSON.stringify(oidc));
             } else {
 	    		console.log( "Callback error: " + parameterMap.error );
                 window.localStorage.setItem("oidc", "");
@@ -75,7 +48,7 @@ callback: https://kurtkanaskie.github.io/oidc-client-code-wec/callback.html
             }
 
             var url = window.location.href;
-            var redirect = url.substring(0,url.lastIndexOf('/')) + "/index.html#/home";
+            var redirect = url.substring(0,url.lastIndexOf('/')) + "/index.html#/callback";
             console.log( "Callback and Redirect: " + url + " redirect: " + redirect);
             window.location.href = redirect;
 

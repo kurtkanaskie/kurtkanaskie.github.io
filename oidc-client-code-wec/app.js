@@ -7,6 +7,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
             templateUrl: 'home.html',
             controller: 'HomeController'
         })
+        .state('callback', {
+            url: '/callback',
+            templateUrl: 'callback.html',
+            controller: 'CallbackController'
+        })
         .state('customers', {
             url: '/customers',
             templateUrl: 'customers.html',
@@ -71,6 +76,59 @@ app.controller("CustomersController", function($scope, $http, $window) {
           $scope.message = response.statusText
           $scope.customers = [];
         });
+    }
+ 
+});
+
+app.controller("CallbackController", function($scope, $http, $window) {
+ 
+    var oidc = $window.localStorage.getItem("oidc");
+    // local storage can only hold strings, if not set "null"
+    if( oidc === null || oidc === "" ) {
+          $scope.status = 401;
+          $scope.message = "You are not authorized";
+    } else {
+
+        var code = JSON.parse($window.localStorage.getItem("oidc")).oauth.code;
+		var fpdata = { 
+			client_id:'wkDnvYG73mmiSCdJqkxZELfkzLZ7YqJu',
+			client_secret:'s9QFxne0ghxLLsnS',
+			grant_type:'authorization_code',
+			code:parameterMap.code
+		};
+
+		console.log( "FPDATA: " + JSON.stringify(fpdata));
+
+		$http({
+			headers: {"Content-Type":"application/x-www-form-urlencoded"},
+			method : "POST",
+			url : "https://wec-nonprod-dev.apigee.net/azure-b2c/token",
+			data : fpdata
+		}).then(function successCallback(response) {
+		  console.log( "POST /token OK: " + response.status + JSON.stringify(response.data) );
+		  $scope.status = response.status;
+		  $scope.message = "OK";
+		  $scope.tokenResponse = response.data;
+
+			var oidc = {
+				oauth: {
+					code: parameterMap.code,
+					state: parameterMap.state,
+					scope: parameterMap.scope,
+					access_token: response.data.access_token
+				}
+			};
+			window.localStorage.setItem("oidc", JSON.stringify(oidc));
+			console.log( "OIDC: " + JSON.stringify(oidc));
+		}, function errorCallback(response) {
+		  console.log( "POST /token ERROR: " + response.status + " - " + response.statusText + " - " + JSON.stringify(response.data) );
+		  $scope.status = response.status;
+		  $scope.message = response.statusText
+		  $scope.tokenResponse = {};
+			window.localStorage.setItem("oidc", "");
+			alert("Problem getting access_token");
+		});
+
     }
  
 });
