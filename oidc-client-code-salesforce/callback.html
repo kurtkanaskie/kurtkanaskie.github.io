@@ -33,8 +33,7 @@ callback: https://kurtkanaskie.github.io/oidc-client-code-wec/callback.html
                     oauth: {
                         code: parameterMap.code,
                         state: parameterMap.state,
-                        scope: parameterMap.scope,
-                        access_token: response.data.access_token
+                        scope: parameterMap.scope
                     }
                 };
                 window.localStorage.setItem("oidc", JSON.stringify(oidc));
