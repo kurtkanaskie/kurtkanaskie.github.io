@@ -8,7 +8,7 @@ callback: https://kurtkanaskie.github.io/oidc-client-code-wec/callback.html
     &scope=
 */
             var callback = document.URL;
-            console.log("Code Callback URL: " + callback);
+            console.log("CALLBACK PAGE: " + callback);
             if( callback.includes("#") ) { // OK
                 var callbackResponse = callback.split("#")[1];
             } else { // error
@@ -45,7 +45,7 @@ callback: https://kurtkanaskie.github.io/oidc-client-code-wec/callback.html
             }
 
             var url = window.location.href;
-            var redirect = url.substring(0,url.lastIndexOf('/')) + "/index.html#/home";
+            var redirect = url.substring(0,url.lastIndexOf('/')) + "/index.html#/callback";
             console.log( "Callback and Redirect: " + url + " redirect: " + redirect);
             window.location.href = redirect;
 

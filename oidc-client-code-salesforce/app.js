@@ -13,7 +13,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
             controller: 'CallbackController'
         })
         .state('identity', {
-            url: '/id',
+            url: '/profile',
             templateUrl: 'profile.html',
             controller: 'ProfileController'
         })
