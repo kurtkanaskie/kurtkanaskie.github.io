@@ -29,8 +29,6 @@ callback: https://kurtkanaskie.github.io/oidc-client-code-wec/callback.html
 
             if(parameterMap.code !== undefined && parameterMap.code !== null) {
 
-				console.log( "FPDATA: " + JSON.stringify(fpdata));
-
                 var oidc = {
                     oauth: {
                         code: parameterMap.code,
