@@ -26,6 +26,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 });
  
 app.controller("HomeController", function($scope, $state, $window) {
+    console.log( "HomeController" );
  
     var url = $window.location.href;
     var redirect = url.replace("index.html#/home","callback.html");
@@ -38,7 +39,9 @@ app.controller("HomeController", function($scope, $state, $window) {
 		+ "&state=PA"
 		+ "&scope=openid profile refresh_token";
 
-	console.log( "URL: " + url + " REDIRECT: " + redirect + " AUTHORIZE: " + authorize );
+	console.log( "URL: " + url );
+    console.log( "REDIRECT: " + redirect);
+    console.log( "AUTHORIZE: " + authorize );
     $scope.login = function() {
         $window.location.href = authorize;
     }
@@ -57,6 +60,7 @@ app.controller("HomeController", function($scope, $state, $window) {
 });
 
 app.controller("PingstatusPingController", function($scope, $http, $window) {
+    console.log( "PingstatusPingController" );
  
     var oidc = $window.localStorage.getItem("oidc");
     // local storage can only hold strings, if not set "null"
@@ -87,6 +91,7 @@ app.controller("PingstatusPingController", function($scope, $http, $window) {
 });
 
 app.controller("ProfileController", function($scope, $http, $window) {
+    console.log( "ProfileController" );
  
     var oidc = $window.localStorage.getItem("oidc");
     // local storage can only hold strings, if not set "null"
@@ -117,7 +122,8 @@ app.controller("ProfileController", function($scope, $http, $window) {
 });
 
 app.controller("CallbackController", function($scope, $http, $window) {
- 
+    console.log( "CallbackController" );
+
     var oidc = $window.localStorage.getItem("oidc");
     // local storage can only hold strings, if not set "null"
     if( oidc === null || oidc === "" ) {
