@@ -130,7 +130,8 @@ app.controller("CallbackController", function($scope, $http, $window) {
 			client_id:'D8OGrhQ5YHZfLLg2lJanfU6qw48qAI6X',
 			client_secret:'q2ZrmyRKvdmbWaGX',
 			grant_type:'authorization_code',
-			code:parameterMap.code
+			code:code,
+            redirect_uri:'https://kurtkanaskie.github.io/oidc-client-code-salesforce/callback.html'
 		};
 
 		console.log( "FPDATA: " + JSON.stringify(fpdata));
@@ -148,10 +149,8 @@ app.controller("CallbackController", function($scope, $http, $window) {
 
 			var oidc = {
 				oauth: {
-					code: parameterMap.code,
-					state: parameterMap.state,
-					scope: parameterMap.scope,
-					access_token: response.data.access_token
+					access_token: response.data.access_token,
+                    refresh_token: response.data.refresh_token
 				}
 			};
 			window.localStorage.setItem("oidc", JSON.stringify(oidc));
