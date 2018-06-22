@@ -1,4 +1,10 @@
 var app = angular.module("app", ['ui.router']);
+var REDIRECT_URL = "https://kurtkanaskie.github.io/oidc-client-code-salesforce/callback.html";
+var OIDC_BASEPATH = "https://kurtkanaskietrainer-trial-test.apigee.net/oidc-salesforce/v1";
+var API_HOST = "https://kurtkanaskietrainer-trial-test.apigee.net";
+var CLIENT_ID = D"8OGrhQ5YHZfLLg2lJanfU6qw48qAI6X";
+var CLIENT_SECRET = "q2ZrmyRKvdmbWaGX";
+
  
 app.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
@@ -30,13 +36,13 @@ app.controller("HomeController", function($scope, $state, $window) {
  
     var url = $window.location.href;
     // var redirect = url.replace("index.html#/home","callback.html");
-    var redirect = url.replace("index.html#/home","index.html#/callback");
+    var redirect = url.replace("index.html#/home","callback.html");
     console.log( "REPLACE REDIRECT: " + redirect);
     // This is the oidc-v1-salesforce-test app: D8OGrhQ5YHZfLLg2lJanfU6qw48qAI6X, q2ZrmyRKvdmbWaGX
-    var authorize = "https://kurtkanaskietrainer-trial-test.apigee.net/oidc-salesforce/v1/authorize" 
-        + "?client_id=D8OGrhQ5YHZfLLg2lJanfU6qw48qAI6X"
-        + "&client_secret=q2ZrmyRKvdmbWaGX"
-		+ "&redirect_uri=https://kurtkanaskie.github.io/oidc-client-code-salesforce/index.html#/callback"
+    var authorize = OIDC_BASEPATH + "/authorize" 
+        + "?client_id=" + CLIENT_ID
+        + "&client_secret=" + CLIENT_SECRET
+		+ "&redirect_uri=" + REDIRECT_URL"
 		+ "&response_type=code"
 		+ "&state=PA"
 		+ "&scope=openid profile refresh_token";
@@ -76,7 +82,7 @@ app.controller("PingstatusPingController", function($scope, $http, $window) {
         $http({
             headers: {"Authorization":"Bearer " + token},
             method : "GET",
-            url : "https://kurtkanaskietrainer-trial-test.apigee.net/pingstatus-salesforce/v1/ping"
+            url : API_HOST + "/pingstatus-salesforce/v1/ping"
         }).then(function successCallback(response) {
           // console.log( "Ping OK: " + response.status + JSON.stringify(response.data) );
           $scope.status = response.status;
@@ -107,7 +113,7 @@ app.controller("ProfileController", function($scope, $http, $window) {
         $http({
             headers: {"Authorization":"Bearer " + token},
             method : "GET",
-            url : "https://kurtkanaskietrainer-trial-test.apigee.net/oidc-salesforce/v1/id"
+            url : API_HOST + "/oidc-salesforce/v1/id"
         }).then(function successCallback(response) {
           // console.log( "Profile OK: " + response.status + JSON.stringify(response.data) );
           $scope.status = response.status;
@@ -135,11 +141,11 @@ app.controller("CallbackController", function($scope, $http, $window) {
 
         var code = JSON.parse($window.localStorage.getItem("oidc")).oauth.code;
 		var fpdata = { 
-			client_id:'D8OGrhQ5YHZfLLg2lJanfU6qw48qAI6X',
-			client_secret:'q2ZrmyRKvdmbWaGX',
+			client_id:CLIENT_ID,
+			client_secret:CLIENT_SECRET,
 			grant_type:'authorization_code',
 			code:code,
-            redirect_uri:'https://kurtkanaskie.github.io/oidc-client-code-salesforce/index.html#/callback'
+            redirect_uri:REDIRECT_URL
 		};
 
 		console.log( "FPDATA: " + JSON.stringify(fpdata));
@@ -147,7 +153,7 @@ app.controller("CallbackController", function($scope, $http, $window) {
 		$http({
 			headers: {"Content-Type":"application/x-www-form-urlencoded"},
 			method : "POST",
-			url : "https://kurtkanaskietrainer-trial-test.apigee.net/oidc-salesforce/v1/token",
+			url : OIDC_BASEPATH + "/token",
 			data : fpdata
 		}).then(function successCallback(response) {
 		  console.log( "POST /token OK: " + response.status + JSON.stringify(response.data) );
