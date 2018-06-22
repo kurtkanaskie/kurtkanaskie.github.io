@@ -1,4 +1,6 @@
 var app = angular.module("app", ['ui.router']);
+angular.module('myApp', ['ngPrettyJson']);
+
 var REDIRECT_URL = "https://kurtkanaskie.github.io/oidc-client-code-salesforce/callback.html";
 var OIDC_BASEPATH = "https://kurtkanaskietrainer-trial-test.apigee.net/oidc-salesforce/v1";
 var API_HOST = "https://kurtkanaskietrainer-trial-test.apigee.net";
