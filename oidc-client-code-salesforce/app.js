@@ -51,11 +51,11 @@ app.controller("HomeController", function($scope, $state, $window) {
     console.log( "AUTHORIZE: " + authorize );
     $scope.login = function() {
         $window.location.href = authorize;
-    }
+    };
     $scope.logout = function() {
         $window.localStorage.setItem("oidc", "");
         $state.reload();
-    }
+    };
 
     var oidc = $window.localStorage.getItem("oidc");
     if( oidc === null || oidc === "" ) {
@@ -90,7 +90,7 @@ app.controller("PingstatusPingController", function($scope, $http, $window) {
         }, function errorCallback(response) {
           // console.log( "Ping ERROR: " + response.status + " - " + response.statusText + " - " + JSON.stringify(response.data) );
           $scope.status = response.status;
-          $scope.message = response.statusText
+          $scope.message = response.statusText;
           $scope.customers = [];
         });
     }
@@ -121,7 +121,7 @@ app.controller("ProfileController", function($scope, $http, $window) {
         }, function errorCallback(response) {
           // console.log( "Profile ERROR: " + response.status + " - " + response.statusText + " - " + JSON.stringify(response.data) );
           $scope.status = response.status;
-          $scope.message = response.statusText
+          $scope.message = response.statusText;
           $scope.customers = [];
         });
     }
@@ -160,7 +160,7 @@ app.controller("CallbackController", function($scope, $http, $window) {
 		}).then(function successCallback(response) {
       console.log( "POST /token request: " + OIDC_BASEPATH + "/token" );
       console.log( "POST /token OK: " + response.status);
-      console.log( "POST /token response: ") + JSON.stringify(response.data) );
+      console.log( "POST /token response: " + JSON.stringify(response.data) );
 		  $scope.status = response.status;
 		  $scope.message = "OK";
 		  $scope.tokenResponse = response.data;
@@ -176,7 +176,7 @@ app.controller("CallbackController", function($scope, $http, $window) {
 		}, function errorCallback(response) {
 		  console.log( "POST /token ERROR: " + response.status + " - " + response.statusText + " - " + JSON.stringify(response.data) );
 		  $scope.status = response.status;
-		  $scope.message = response.statusText
+		  $scope.message = response.statusText;
 		  $scope.tokenResponse = {};
 			window.localStorage.setItem("oidc", "");
 			alert("Problem getting access_token");
