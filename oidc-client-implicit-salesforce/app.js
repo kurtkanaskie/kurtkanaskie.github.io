@@ -39,11 +39,10 @@ app.controller("HomeController", function($scope, $state, $window) {
     var redirect = url.replace("index.html#/home","callback.html");
     var authorize = OIDC_BASEPATH + "/authorize" 
         + "?client_id=" + CLIENT_ID
-        + "&client_secret=" + CLIENT_SECRET
     + "&redirect_uri=" + REDIRECT_URL
-    + "&response_type=code"
+    + "&response_type=token id_token"
     + "&state=PA"
-    + "&scope=openid profile refresh_token";
+    + "&scope=openid";
 
     console.log( "URL: " + url );
     console.log( "REDIRECT: " + redirect);

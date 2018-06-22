@@ -9,9 +9,9 @@ callback: https://kurtkanaskie.github.io/oidc-client-code-wec/callback.html
 */
             var callback = document.URL;
             console.log("CALLBACK PAGE: " + callback);
-            if( callback.includes("?") ) { // OK
+            if( callback.includes("?") ) { // Authorization Code
                 var callbackResponse = callback.split("?")[1];
-            } else { // error
+            } else { // Implicit
                 var callbackResponse = callback.split("#")[1];
             }
             var responseParameters = (callbackResponse).split("&");
@@ -27,12 +27,14 @@ callback: https://kurtkanaskie.github.io/oidc-client-code-wec/callback.html
             console.log( "Callback state: " + parameterMap.state );
             console.log( "Callback scope: " + parameterMap.scope );
             console.log( "Callback id: " + parameterMap.id );
+            console.log( "Callback access_token: " + parameterMap.access_token );
 
             if(parameterMap.code !== undefined && parameterMap.code !== null) {
 
                 var oidc = {
                     oauth: {
                         code: parameterMap.code,
+                        access_token: parameterMap.access_token
                         state: parameterMap.state,
                         scope: parameterMap.scope
                     }
@@ -46,7 +48,7 @@ callback: https://kurtkanaskie.github.io/oidc-client-code-wec/callback.html
             }
 
             var url = window.location.href;
-            var redirect = url.substring(0,url.lastIndexOf('/')) + "/index.html#/home";
+            var redirect = url.substring(0,url.lastIndexOf('/')) + "/index.html#/callback";
             console.log( "Callback and Redirect: " + url + " redirect: " + redirect);
             window.location.href = redirect;
 
