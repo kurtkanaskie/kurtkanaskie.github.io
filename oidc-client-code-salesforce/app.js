@@ -5,7 +5,7 @@ var API_HOST = "https://kurtkanaskietrainer-trial-test.apigee.net";
 var CLIENT_ID = "D8OGrhQ5YHZfLLg2lJanfU6qw48qAI6X";
 var CLIENT_SECRET = "q2ZrmyRKvdmbWaGX";
 
- 
+
 app.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('home', {
