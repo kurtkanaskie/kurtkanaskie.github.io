@@ -87,7 +87,7 @@ app.controller("PingstatusPingController", function($scope, $http, $window) {
           // console.log( "Ping OK: " + response.status + JSON.stringify(response.data) );
           $scope.status = response.status;
           $scope.message = "OK";
-          $scope.ping = response.data;
+          $scope.ping = JSON.stringify(response.data, undefined, 2);
         }, function errorCallback(response) {
           // console.log( "Ping ERROR: " + response.status + " - " + response.statusText + " - " + JSON.stringify(response.data) );
           $scope.status = response.status;
@@ -118,7 +118,7 @@ app.controller("UserinfoController", function($scope, $http, $window) {
         // console.log( "Profile OK: " + response.status + JSON.stringify(response.data) );
         $scope.status = response.status;
         $scope.message = "OK";
-        $scope.userinfo = response.data;
+        $scope.userinfo = JSON.stringify(response.data, undefined, 2);
       }, function errorCallback(response) {
         // console.log( "Profile ERROR: " + response.status + " - " + response.statusText + " - " + JSON.stringify(response.data) );
         $scope.status = response.status;
