@@ -29,7 +29,8 @@ app.controller("HomeController", function($scope, $state, $window) {
     console.log( "HomeController" );
  
     var url = $window.location.href;
-    var redirect = url.replace("index.html#/home","callback.html");
+    // var redirect = url.replace("index.html#/home","callback.html");
+    var redirect = url.replace("index.html#/home","index.html#/callback");
     // This is the oidc-v1-salesforce-test app: D8OGrhQ5YHZfLLg2lJanfU6qw48qAI6X, q2ZrmyRKvdmbWaGX
     var authorize = "https://kurtkanaskietrainer-trial-test.apigee.net/oidc-salesforce/v1/authorize" 
         + "?client_id=D8OGrhQ5YHZfLLg2lJanfU6qw48qAI6X"
@@ -137,7 +138,7 @@ app.controller("CallbackController", function($scope, $http, $window) {
 			client_secret:'q2ZrmyRKvdmbWaGX',
 			grant_type:'authorization_code',
 			code:code,
-            redirect_uri:'https://kurtkanaskie.github.io/oidc-client-code-salesforce/callback.html'
+            redirect_uri:'https://kurtkanaskie.github.io/oidc-client-code-salesforce/index.html#/callback'
 		};
 
 		console.log( "FPDATA: " + JSON.stringify(fpdata));
