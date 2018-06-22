@@ -18,10 +18,10 @@ app.config(function($stateProvider, $urlRouterProvider) {
             templateUrl: 'callback.html',
             controller: 'CallbackController'
         })
-        .state('identity', {
-            url: '/profile',
-            templateUrl: 'profile.html',
-            controller: 'ProfileController'
+        .state('userinfo', {
+            url: '/userinfo',
+            templateUrl: 'userinfo.html',
+            controller: 'UserinfoController'
         })
         .state('ping', {
             url: '/ping',
@@ -46,9 +46,10 @@ app.controller("HomeController", function($scope, $state, $window) {
 		+ "&state=PA"
 		+ "&scope=openid profile refresh_token";
 
-	console.log( "URL: " + url );
+    console.log( "URL: " + url );
     console.log( "REDIRECT: " + redirect);
     console.log( "AUTHORIZE: " + authorize );
+
     $scope.login = function() {
         $window.location.href = authorize;
     };
@@ -97,33 +98,33 @@ app.controller("PingstatusPingController", function($scope, $http, $window) {
  
 });
 
-app.controller("ProfileController", function($scope, $http, $window) {
-    console.log( "ProfileController" );
+app.controller("UserinfoController", function($scope, $http, $window) {
+    console.log( "UserinfoController" );
  
     var oidc = $window.localStorage.getItem("oidc");
     // local storage can only hold strings, if not set "null"
     if( oidc === null || oidc === "" ) {
-          $scope.status = 401;
-          $scope.message = "You are not logged in";
+      $scope.status = 401;
+      $scope.message = "You are not logged in";
     } else {
 
-        var token = JSON.parse($window.localStorage.getItem("oidc")).oauth.access_token;
+      var token = JSON.parse($window.localStorage.getItem("oidc")).oauth.access_token;
 
-        $http({
-            headers: {"Authorization":"Bearer " + token},
-            method : "GET",
-            url : API_HOST + "/oidc-salesforce/v1/id"
-        }).then(function successCallback(response) {
-          // console.log( "Profile OK: " + response.status + JSON.stringify(response.data) );
-          $scope.status = response.status;
-          $scope.message = "OK";
-          $scope.profile = response.data;
-        }, function errorCallback(response) {
-          // console.log( "Profile ERROR: " + response.status + " - " + response.statusText + " - " + JSON.stringify(response.data) );
-          $scope.status = response.status;
-          $scope.message = response.statusText;
-          $scope.customers = [];
-        });
+      $http({
+          headers: {"Authorization":"Bearer " + token},
+          method : "GET",
+          url : API_HOST + "/oidc-salesforce/v1/userinfo"
+      }).then(function successCallback(response) {
+        // console.log( "Profile OK: " + response.status + JSON.stringify(response.data) );
+        $scope.status = response.status;
+        $scope.message = "OK";
+        $scope.userinfo = response.data;
+      }, function errorCallback(response) {
+        // console.log( "Profile ERROR: " + response.status + " - " + response.statusText + " - " + JSON.stringify(response.data) );
+        $scope.status = response.status;
+        $scope.message = response.statusText;
+        $scope.userinfo = {};
+      });
     }
  
 });
@@ -134,54 +135,54 @@ app.controller("CallbackController", function($scope, $http, $window) {
     var oidc = $window.localStorage.getItem("oidc");
     // local storage can only hold strings, if not set "null"
     if( oidc === null || oidc === "" ) {
-          $scope.status = 401;
-          $scope.message = "You are not authorized";
+      $scope.status = 401;
+      $scope.message = "You are not authorized";
     } else {
+      var code = JSON.parse($window.localStorage.getItem("oidc")).oauth.code;
+  		var data = { 
+  			client_id:CLIENT_ID,
+  			client_secret:CLIENT_SECRET,
+  			grant_type:'authorization_code',
+  			code:code,
+        redirect_uri:REDIRECT_URL
+  		};
+      var fpdata = Object.keys(data).map((key) => { 
+        return encodeURIComponent(key) + '=' + encodeURIComponent(data[key]); 
+      }).join('&');
 
-    var code = JSON.parse($window.localStorage.getItem("oidc")).oauth.code;
-		var data = { 
-			client_id:CLIENT_ID,
-			client_secret:CLIENT_SECRET,
-			grant_type:'authorization_code',
-			code:code,
-      redirect_uri:REDIRECT_URL
-		};
-    var fpdata = Object.keys(data).map((key) => { 
-      return encodeURIComponent(key) + '=' + encodeURIComponent(data[key]); 
-    }).join('&');
+  		console.log( "FPDATA: " + JSON.stringify(fpdata));
 
-		console.log( "FPDATA: " + JSON.stringify(fpdata));
+  		$http({
+  			headers: {"Content-Type":"application/x-www-form-urlencoded"},
+  			method : "POST",
+  			url : OIDC_BASEPATH + "/token",
+  			data : fpdata
+  		}).then(function successCallback(response) {
+        console.log( "POST /token request: " + OIDC_BASEPATH + "/token" );
+        console.log( "POST /token OK: " + response.status);
+        console.log( "POST /token response: " + JSON.stringify(response.data) );
+  		  $scope.status = response.status;
+  		  $scope.message = "OK";
+  		  $scope.tokenResponse = response.data;
 
-		$http({
-			headers: {"Content-Type":"application/x-www-form-urlencoded"},
-			method : "POST",
-			url : OIDC_BASEPATH + "/token",
-			data : fpdata
-		}).then(function successCallback(response) {
-      console.log( "POST /token request: " + OIDC_BASEPATH + "/token" );
-      console.log( "POST /token OK: " + response.status);
-      console.log( "POST /token response: " + JSON.stringify(response.data) );
-		  $scope.status = response.status;
-		  $scope.message = "OK";
-		  $scope.tokenResponse = response.data;
-
-			var oidc = {
-				oauth: {
-					access_token: response.data.access_token,
-          refresh_token: response.data.refresh_token
-				}
-			};
-			window.localStorage.setItem("oidc", JSON.stringify(oidc));
-			console.log( "OIDC: " + JSON.stringify(oidc));
-		}, function errorCallback(response) {
-		  console.log( "POST /token ERROR: " + response.status + " - " + response.statusText + " - " + JSON.stringify(response.data) );
-		  $scope.status = response.status;
-		  $scope.message = response.statusText;
-		  $scope.tokenResponse = {};
-			window.localStorage.setItem("oidc", "");
-			alert("Problem getting access_token");
-		});
-
+  			var oidc = {
+  				oauth: {
+  					access_token: response.data.access_token,
+            refresh_token: response.data.refresh_token
+  				}
+  			};
+  			window.localStorage.setItem("oidc", JSON.stringify(oidc));
+  			console.log( "OIDC: " + JSON.stringify(oidc));
+  		}, function errorCallback(response) {
+  		  console.log( "POST /token ERROR: " + response.status + " - " + response.statusText + " - " + JSON.stringify(response.data) );
+  		  $scope.status = response.status;
+  		  $scope.message = response.statusText;
+  		  $scope.tokenResponse = {};
+  			window.localStorage.setItem("oidc", "");
+  			alert("Problem getting access_token");
+  		});
     }
- 
+    var url = $window.location.href;
+    var gohome = url.replace("#/callback","#/home");
+    $window.location.href = gohome;
 });
