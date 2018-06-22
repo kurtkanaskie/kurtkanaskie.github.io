@@ -146,8 +146,8 @@ app.controller("CallbackController", function($scope, $http, $window) {
 			code:code,
       redirect_uri:REDIRECT_URL
 		};
-    var fpdata = Object.keys(fpdata).map((key) => { 
-      return encodeURIComponent(key) + '=' + encodeURIComponent(fpdata[key]); 
+    var fpdata = Object.keys(data).map((key) => { 
+      return encodeURIComponent(key) + '=' + encodeURIComponent(data[key]); 
     }).join('&');
 
 		console.log( "FPDATA: " + JSON.stringify(fpdata));
