@@ -35,7 +35,6 @@ app.controller("HomeController", function($scope, $state, $window) {
     console.log( "HomeController" );
  
     var url = $window.location.href;
-    // var redirect = url.replace("index.html#/home","callback.html");
     var redirect = url.replace("index.html#/home","callback.html");
     console.log( "REPLACE REDIRECT: " + redirect);
     // This is the oidc-v1-salesforce-test app: D8OGrhQ5YHZfLLg2lJanfU6qw48qAI6X, q2ZrmyRKvdmbWaGX
@@ -139,14 +138,17 @@ app.controller("CallbackController", function($scope, $http, $window) {
           $scope.message = "You are not authorized";
     } else {
 
-        var code = JSON.parse($window.localStorage.getItem("oidc")).oauth.code;
-		var fpdata = { 
+    var code = JSON.parse($window.localStorage.getItem("oidc")).oauth.code;
+		var data = { 
 			client_id:CLIENT_ID,
 			client_secret:CLIENT_SECRET,
 			grant_type:'authorization_code',
 			code:code,
-            redirect_uri:REDIRECT_URL
+      redirect_uri:REDIRECT_URL
 		};
+    var fpdata = Object.keys(fpdata).map((key) => { 
+      return encodeURIComponent(key) + '=' + encodeURIComponent(fpdata[key]); 
+    }).join('&');
 
 		console.log( "FPDATA: " + JSON.stringify(fpdata));
 
@@ -156,7 +158,9 @@ app.controller("CallbackController", function($scope, $http, $window) {
 			url : OIDC_BASEPATH + "/token",
 			data : fpdata
 		}).then(function successCallback(response) {
-		  console.log( "POST /token OK: " + response.status + JSON.stringify(response.data) );
+      console.log( "POST /token request: " + OIDC_BASEPATH + "/token" );
+      console.log( "POST /token OK: " + response.status);
+      console.log( "POST /token response: ") + JSON.stringify(response.data) );
 		  $scope.status = response.status;
 		  $scope.message = "OK";
 		  $scope.tokenResponse = response.data;
@@ -164,7 +168,7 @@ app.controller("CallbackController", function($scope, $http, $window) {
 			var oidc = {
 				oauth: {
 					access_token: response.data.access_token,
-                    refresh_token: response.data.refresh_token
+          refresh_token: response.data.refresh_token
 				}
 			};
 			window.localStorage.setItem("oidc", JSON.stringify(oidc));
