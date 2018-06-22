@@ -2,7 +2,7 @@ var app = angular.module("app", ['ui.router']);
 var REDIRECT_URL = "https://kurtkanaskie.github.io/oidc-client-code-salesforce/callback.html";
 var OIDC_BASEPATH = "https://kurtkanaskietrainer-trial-test.apigee.net/oidc-salesforce/v1";
 var API_HOST = "https://kurtkanaskietrainer-trial-test.apigee.net";
-var CLIENT_ID = D"8OGrhQ5YHZfLLg2lJanfU6qw48qAI6X";
+var CLIENT_ID = "D8OGrhQ5YHZfLLg2lJanfU6qw48qAI6X";
 var CLIENT_SECRET = "q2ZrmyRKvdmbWaGX";
 
  
