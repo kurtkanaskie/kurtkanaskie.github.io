@@ -42,7 +42,7 @@ app.controller("HomeController", function($scope, $state, $window) {
     var authorize = OIDC_BASEPATH + "/authorize" 
         + "?client_id=" + CLIENT_ID
         + "&client_secret=" + CLIENT_SECRET
-		+ "&redirect_uri=" + REDIRECT_URL"
+		+ "&redirect_uri=" + REDIRECT_URL
 		+ "&response_type=code"
 		+ "&state=PA"
 		+ "&scope=openid profile refresh_token";
