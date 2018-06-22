@@ -90,6 +90,7 @@ app.controller("PingstatusPingController", function($scope, $http, $window) {
           $scope.status = response.status;
           $scope.message = "OK";
           $scope.ping = JSON.stringify(response.data, undefined, 2);
+          $scope.json = response.data;
         }, function errorCallback(response) {
           // console.log( "Ping ERROR: " + response.status + " - " + response.statusText + " - " + JSON.stringify(response.data) );
           $scope.status = response.status;
