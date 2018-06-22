@@ -42,7 +42,8 @@ app.controller("HomeController", function($scope, $state, $window) {
     + "&redirect_uri=" + REDIRECT_URL
     + "&response_type=token id_token"
     + "&state=PA"
-    + "&scope=openid";
+    + "&scope=openid"
+    + "&nonce=" + Date.now();
 
     console.log( "URL: " + url );
     console.log( "REDIRECT: " + redirect);
