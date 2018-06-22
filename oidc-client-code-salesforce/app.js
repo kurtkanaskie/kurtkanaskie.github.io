@@ -31,11 +31,12 @@ app.controller("HomeController", function($scope, $state, $window) {
     var url = $window.location.href;
     // var redirect = url.replace("index.html#/home","callback.html");
     var redirect = url.replace("index.html#/home","index.html#/callback");
+    console.log( "REPLACE REDIRECT: " + redirect);
     // This is the oidc-v1-salesforce-test app: D8OGrhQ5YHZfLLg2lJanfU6qw48qAI6X, q2ZrmyRKvdmbWaGX
     var authorize = "https://kurtkanaskietrainer-trial-test.apigee.net/oidc-salesforce/v1/authorize" 
         + "?client_id=D8OGrhQ5YHZfLLg2lJanfU6qw48qAI6X"
         + "&client_secret=q2ZrmyRKvdmbWaGX"
-		+ "&redirect_uri=" + redirect
+		+ "&redirect_uri=https://kurtkanaskie.github.io/oidc-client-code-salesforce/index.html#/callback"
 		+ "&response_type=code"
 		+ "&state=PA"
 		+ "&scope=openid profile refresh_token";
