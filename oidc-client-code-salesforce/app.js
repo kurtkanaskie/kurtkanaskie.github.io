@@ -95,7 +95,7 @@ app.controller("PingstatusPingController", function($scope, $http, $window) {
           // console.log( "Ping ERROR: " + response.status + " - " + response.statusText + " - " + JSON.stringify(response.data) );
           $scope.status = response.status;
           $scope.message = response.statusText;
-          $scope.customers = [];
+          $scope.ping = {};
         });
     }
  
