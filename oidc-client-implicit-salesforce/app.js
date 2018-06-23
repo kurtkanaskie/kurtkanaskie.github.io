@@ -3,8 +3,8 @@ var app = angular.module("app", ['ui.router']);
 var REDIRECT_URL = "https://kurtkanaskie.github.io/oidc-client-implicit-salesforce/callback.html";
 var OIDC_BASEPATH = "https://kurtkanaskietrainer-trial-test.apigee.net/oidc-salesforce/v1";
 var API_HOST = "https://kurtkanaskietrainer-trial-test.apigee.net";
-var CLIENT_ID = "D8OGrhQ5YHZfLLg2lJanfU6qw48qAI6X";
-var CLIENT_SECRET = "q2ZrmyRKvdmbWaGX";
+var CLIENT_ID = "56PyPbSPyUIILuQjdhAcwWNmSsTvCijF";
+var CLIENT_SECRET = "RtURR4dtJZ76gtFA";
 
 
 app.config(function($stateProvider, $urlRouterProvider) {
@@ -137,7 +137,7 @@ app.controller("CallbackController", function($scope, $http, $window) {
       $scope.status = 401;
       $scope.message = "You are not authorized";
     } else {
-      var code = JSON.parse($window.localStorage.getItem("oidc")).oauth.code;
+      var code = JSON.parse($window.localStorage.getItem("oidc")).oauth.access_token;
   		var data = { 
   			client_id:CLIENT_ID,
   			client_secret:CLIENT_SECRET,

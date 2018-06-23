@@ -23,18 +23,18 @@ callback: https://kurtkanaskie.github.io/oidc-client-code-wec/callback.html
                 console.log( "Param: " + paramName + ":" + paramValue );
                 parameterMap[paramName] = paramValue;
             }
+            console.log( "Callback access_token: " + parameterMap.access_token );
             console.log( "Callback code: " + parameterMap.code );
             console.log( "Callback state: " + parameterMap.state );
             console.log( "Callback scope: " + parameterMap.scope );
             console.log( "Callback id: " + parameterMap.id );
-            console.log( "Callback access_token: " + parameterMap.access_token );
 
             if(parameterMap.code !== undefined && parameterMap.code !== null) {
 
                 var oidc = {
                     oauth: {
                         code: parameterMap.code,
-                        access_token: parameterMap.access_token
+                        access_token: parameterMap.access_token,
                         state: parameterMap.state,
                         scope: parameterMap.scope
                     }
