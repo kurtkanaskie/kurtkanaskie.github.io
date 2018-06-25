@@ -41,8 +41,8 @@ app.controller("HomeController", function($scope, $state, $window) {
         + "?client_id=" + CLIENT_ID
     + "&redirect_uri=" + REDIRECT_URL
     + "&response_type=token id_token"
-    + "&state=PA"
-    + "&scope=EDGE-READ EDGE-WRITE"
+    + "&state=PA-implicit"
+    + "&scope=EDGE-READ EDGE-WRITE IMPLICIT"
     + "&nonce=" + Date.now();
 
     console.log( "URL: " + url );

@@ -42,8 +42,8 @@ app.controller("HomeController", function($scope, $state, $window) {
         + "&client_secret=" + CLIENT_SECRET
     + "&redirect_uri=" + REDIRECT_URL
     + "&response_type=code"
-    + "&state=PA"
-    + "&scope=EDGE-READ EDGE-WRITE";
+    + "&state=PA-code"
+    + "&scope=EDGE-READ EDGE-WRITE CODE";
 
     console.log( "URL: " + url );
     console.log( "REDIRECT: " + redirect);
