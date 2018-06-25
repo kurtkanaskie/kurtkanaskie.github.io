@@ -43,7 +43,7 @@ app.controller("HomeController", function($scope, $state, $window) {
     + "&redirect_uri=" + REDIRECT_URL
     + "&response_type=code"
     + "&state=PA"
-    + "&scope=openid profile refresh_token";
+    + "&scope=EDGE-READ EDGE-WRITE";
 
     console.log( "URL: " + url );
     console.log( "REDIRECT: " + redirect);
