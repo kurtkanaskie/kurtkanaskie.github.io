@@ -29,7 +29,7 @@ callback: https://kurtkanaskie.github.io/oidc-client-code-wec/callback.html
             console.log( "Callback scope: " + parameterMap.scope );
             console.log( "Callback id: " + parameterMap.id );
 
-            if(parameterMap.code !== undefined && parameterMap.code !== null) {
+            if(parameterMap.access_token !== undefined && parameterMap.access_token !== null) {
 
                 var oidc = {
                     oauth: {
