@@ -1,10 +1,10 @@
 var app = angular.module("app", ['ui.router']);
 
 var REDIRECT_URL = "https://kurtkanaskie.github.io/oidc-client-code-salesforce/callback.html";
-var OIDC_BASEPATH = "https://kurtkanaskietrainer-trial-test.apigee.net/oidc-salesforce/v1";
-var API_HOST = "https://kurtkanaskietrainer-trial-test.apigee.net";
-var CLIENT_ID = "OkTBlfg0maxyGdnETC1laYjtOeCQYms4";
-var CLIENT_SECRET = "WX9eQPl3A0h7yWjG";
+var OIDC_BASEPATH = "https://YOUR_ORG-YOUR_ENV.apigee.net/oidc-salesforce/v1";
+var API_HOST = "https://YOUR_ORG-YOUR_ENV.apigee.net";
+var CLIENT_ID = "YOUR_CLIENT_ID";
+var CLIENT_SECRET = "YOUR_CLIENT_SECRET";
 
 
 app.config(function($stateProvider, $urlRouterProvider) {
