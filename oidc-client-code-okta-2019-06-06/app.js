@@ -82,7 +82,7 @@ app.controller("PingstatusPingController", function($scope, $http, $window) {
         $http({
             headers: {"Authorization":"Bearer " + token},
             method : "GET",
-            url : API_HOST + "/digikey/v1/ping"
+            url : API_HOST + "/pingstatus-oauth/v1/ping"
         }).then(function successCallback(response) {
           // console.log( "Ping OK: " + response.status + JSON.stringify(response.data) );
           $scope.status = response.status;
@@ -113,7 +113,7 @@ app.controller("UserinfoController", function($scope, $http, $window) {
       $http({
           headers: {"Authorization":"Bearer " + token},
           method : "GET",
-          url : API_HOST + "/oidc-salesforce/v1/userinfo"
+          url : OIDC_BASEPATH + "/userinfo"
       }).then(function successCallback(response) {
         // console.log( "Profile OK: " + response.status + JSON.stringify(response.data) );
         $scope.status = response.status;
