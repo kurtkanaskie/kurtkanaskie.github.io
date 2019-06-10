@@ -35,43 +35,40 @@ app.config(function($stateProvider, $urlRouterProvider) {
  
 app.controller("HomeController", function($scope, $http, $state, $window) {
     console.log( "HomeController" );
- 
-    var url = $window.location.href;
-    var redirect = url.replace("index.html#/home","callback.html");
-    var authorize = OIDC_BASEPATH + "/authorize" 
-        + "?client_id=" + CLIENT_ID
-        + "&client_secret=" + CLIENT_SECRET
-    + "&redirect_uri=" + REDIRECT_URL
-    + "&response_type=code"
-    + "&state=PA-code"
-    + "&scope=EDGE-READ EDGE-WRITE CODE";
-
-    console.log( "URL: " + url );
-    console.log( "REDIRECT: " + redirect);
-    console.log( "AUTHORIZE: " + authorize );
 
     $scope.login = function() {
-        $window.location.href = authorize;
+      var url = $window.location.href;
+      var redirect = url.replace("index.html#/home","callback.html");
+      var authorize = OIDC_BASEPATH + "/authorize" 
+          + "?client_id=" + CLIENT_ID
+          + "&client_secret=" + CLIENT_SECRET
+          + "&redirect_uri=" + REDIRECT_URL
+          + "&response_type=code"
+          + "&state=PA-code"
+          + "&scope=EDGE-READ EDGE-WRITE CODE";
+
+      console.log( "URL: " + url );
+      console.log( "REDIRECT: " + redirect);
+      console.log( "AUTHORIZE: " + authorize );
+      
+      $window.location.href = authorize;
     };
     $scope.logout = function() {
-        var token = JSON.parse($window.localStorage.getItem("oidc")).oauth.access_token;
-        /*
-        $window.localStorage.setItem("oidc", "");
-        var logout = OIDC_BASEPATH + "/logout?access_token=" + token;
-        $window.location.href = logout;
-        */
+      var token = JSON.parse($window.localStorage.getItem("oidc")).oauth.access_token;
+      
+      $window.localStorage.setItem("oidc", "");
 
-        $http({
-            headers: {"Authorization":"Bearer " + token},
-            method : "GET",
-            url : OIDC_BASEPATH + "/logout"
-        }).then(function successCallback(response) {
-          console.log( "Logout OK: " + response.status + JSON.stringify(response.data) );
-        }, function errorCallback(response) {
-          console.log( "Logout ERROR: " + response.status + " - " + response.statusText + " - " + JSON.stringify(response.data) );
-        });
+      $http({
+          headers: {"Authorization":"Bearer " + token},
+          method : "GET",
+          url : OIDC_BASEPATH + "/logout"
+      }).then(function successCallback(response) {
+        console.log( "Logout OK: " + response.status + JSON.stringify(response.data) );
+      }, function errorCallback(response) {
+        console.log( "Logout ERROR: " + response.status + " - " + response.statusText + " - " + JSON.stringify(response.data) );
+      });
 
-        $state.reload();
+      $state.reload();
     };
 
     var oidc = $window.localStorage.getItem("oidc");
@@ -89,8 +86,8 @@ app.controller("PingstatusPingController", function($scope, $http, $window) {
     var oidc = $window.localStorage.getItem("oidc");
     // local storage can only hold strings, if not set "null"
     if( oidc === null || oidc === "" ) {
-          $scope.status = 401;
-          $scope.message = "You are not logged in";
+        $scope.status = 401;
+        $scope.message = "You are not logged in";
     } else {
 
         var token = JSON.parse($window.localStorage.getItem("oidc")).oauth.access_token;
