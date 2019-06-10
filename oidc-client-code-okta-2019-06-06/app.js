@@ -55,9 +55,22 @@ app.controller("HomeController", function($scope, $state, $window) {
     };
     $scope.logout = function() {
         var token = JSON.parse($window.localStorage.getItem("oidc")).oauth.access_token;
+        /*
         $window.localStorage.setItem("oidc", "");
         var logout = OIDC_BASEPATH + "/logout?access_token=" + token;
         $window.location.href = logout;
+        */
+
+        $http({
+            headers: {"Authorization":"Bearer " + token},
+            method : "GET",
+            url : OIDC_BASEPATH + "/logout"
+        }).then(function successCallback(response) {
+          console.log( "Logout OK: " + response.status + JSON.stringify(response.data) );
+        }, function errorCallback(response) {
+          console.log( "Logout ERROR: " + response.status + " - " + response.statusText + " - " + JSON.stringify(response.data) );
+        });
+
         $state.reload();
     };
 
