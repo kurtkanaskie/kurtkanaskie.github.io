@@ -33,7 +33,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/home');
 });
  
-app.controller("HomeController", function($scope, $state, $window) {
+app.controller("HomeController", function($scope, $http, $state, $window) {
     console.log( "HomeController" );
  
     var url = $window.location.href;
