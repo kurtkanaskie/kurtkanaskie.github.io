@@ -222,12 +222,12 @@ app.controller("IntrospectController", function($scope, $http, $window) {
           method : "GET",
           url : OIDC_BASEPATH + "/introspect"
       }).then(function successCallback(response) {
-        // console.log( "Profile OK: " + response.status + JSON.stringify(response.data) );
+        console.log( "Introspect OK: " + response.status + JSON.stringify(response.data) );
         $scope.status = response.status;
         $scope.message = "OK";
         $scope.introspect = JSON.stringify(response.data, undefined, 2);
       }, function errorCallback(response) {
-        // console.log( "Profile ERROR: " + response.status + " - " + response.statusText + " - " + JSON.stringify(response.data) );
+        console.log( "Introspect ERROR: " + response.status + " - " + response.statusText + " - " + JSON.stringify(response.data) );
         $scope.status = response.status;
         $scope.message = response.statusText;
         $scope.introspect = {};
