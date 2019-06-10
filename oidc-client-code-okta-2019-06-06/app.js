@@ -54,7 +54,10 @@ app.controller("HomeController", function($scope, $state, $window) {
         $window.location.href = authorize;
     };
     $scope.logout = function() {
+        var token = oids.access_token;
         $window.localStorage.setItem("oidc", "");
+        var logout = OIDC_BASEPATH + "/logout?access_token=" + token;
+        $window.location.href = logout;
         $state.reload();
     };
 
