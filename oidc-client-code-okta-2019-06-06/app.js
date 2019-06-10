@@ -25,6 +25,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
             templateUrl: 'userinfo.html',
             controller: 'UserinfoController'
         })
+        .state('introspect', {
+            url: '/introspect',
+            templateUrl: 'introspect.html',
+            controller: 'IntrospectController'
+        })
         .state('ping', {
             url: '/ping',
             templateUrl: 'ping.html',
@@ -220,7 +225,7 @@ app.controller("IntrospectController", function($scope, $http, $window) {
         // console.log( "Profile OK: " + response.status + JSON.stringify(response.data) );
         $scope.status = response.status;
         $scope.message = "OK";
-        $scope.userinfo = JSON.stringify(response.data, undefined, 2);
+        $scope.introspect = JSON.stringify(response.data, undefined, 2);
       }, function errorCallback(response) {
         // console.log( "Profile ERROR: " + response.status + " - " + response.statusText + " - " + JSON.stringify(response.data) );
         $scope.status = response.status;
