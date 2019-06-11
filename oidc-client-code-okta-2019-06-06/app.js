@@ -121,20 +121,10 @@ app.controller("HomeController", function($scope, $http, $state, $window) {
       var token = JSON.parse($window.localStorage.getItem("oidc")).oauth.access_token;
       
       $window.localStorage.setItem("oidc", "");
-/*
-      $http({
-          headers: {"Authorization":"Bearer " + token},
-          method : "GET",
-          url : OIDC_BASEPATH + "/logout"
-      }).then(function successCallback(response) {
-        console.log( "Logout OK: " + response.status + JSON.stringify(response.data) );
-      }, function errorCallback(response) {
-        console.log( "Logout ERROR: " + response.status + " - " + response.statusText + " - " + JSON.stringify(response.data) );
-      });
-*/
+
       var url = $window.location.href;
       var redirect = url.replace("index.html#/home","index.html");
-      var logout = OIDC_BASEPATH + "/logout?access_token=" + token + "&post_logout_redirect_uri=" + $window.location.href + "&state=PA-logout";
+      var logout = OIDC_BASEPATH + "/logout?access_token=" + token + "&post_logout_redirect_uri=" + redirect + "&state=PA-logout";
       console.log( "LOGOUT: " + logout );
       
       $window.location.href = logout;
