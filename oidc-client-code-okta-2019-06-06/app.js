@@ -132,7 +132,9 @@ app.controller("HomeController", function($scope, $http, $state, $window) {
         console.log( "Logout ERROR: " + response.status + " - " + response.statusText + " - " + JSON.stringify(response.data) );
       });
 */
-      var logout = OIDC_BASEPATH + "/logout?access_token=" + token;
+      var logout = OIDC_BASEPATH + "/logout?access_token=" + token + "&post_logout_redirect_uri=" + $window.location.href + "&state=PA-logout";
+      console.log( "LOGOUT: " + logout );
+      
       $window.location.href = logout;
       $state.reload();
     };
