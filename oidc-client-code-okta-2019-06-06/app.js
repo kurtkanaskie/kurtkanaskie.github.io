@@ -116,11 +116,12 @@ app.controller("HomeController", function($scope, $http, $state, $window) {
 
       $window.location.href = authorize;
     };
+
     $scope.logout = function() {
       var token = JSON.parse($window.localStorage.getItem("oidc")).oauth.access_token;
       
       $window.localStorage.setItem("oidc", "");
-
+/*
       $http({
           headers: {"Authorization":"Bearer " + token},
           method : "GET",
@@ -130,7 +131,9 @@ app.controller("HomeController", function($scope, $http, $state, $window) {
       }, function errorCallback(response) {
         console.log( "Logout ERROR: " + response.status + " - " + response.statusText + " - " + JSON.stringify(response.data) );
       });
-
+*/
+      var logout = OIDC_BASEPATH + "/logout?access_token=" + token;
+      $window.location.href = logout;
       $state.reload();
     };
 
