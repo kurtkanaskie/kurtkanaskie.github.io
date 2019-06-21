@@ -1,6 +1,6 @@
 var app = angular.module("app", ['ui.router']);
 
-var REDIRECT_URL = "https://kurtkanaskie.github.io/oidc-client-code-okta-2019-06-06/callback.html";
+var REDIRECT_URL = "https://kurtkanaskie.github.io/oidc-client-implicit-okta-2019-06-06/callback.html";
 var API_HOST = "https://amer-demo13-test.apigee.net";
 var OIDC_BASEPATH = API_HOST + "/okta-trial/v1/oauth";
 // App = pingstatus-oidc-v1-okta-trial-app-test
@@ -108,7 +108,7 @@ app.controller("HomeController", function($scope, $http, $state, $window) {
           + "&redirect_uri=" + REDIRECT_URL
           + "&response_type=token id_token"
           + "&state=PA-implicit"
-          + "&scope=EDGE-READ EDGE-WRITE IMPLICIT",
+          + "&scope=EDGE-READ EDGE-WRITE IMPLICIT"
           + "&nonce=" + Date.now();
 
       console.log( "URL: " + url );
