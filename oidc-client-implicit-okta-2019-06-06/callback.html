@@ -28,11 +28,12 @@ callback: https://kurtkanaskie.github.io/oidc-client-code-okta/callback.html
             console.log( "Callback scope: " + parameterMap.scope );
             console.log( "Callback id: " + parameterMap.id );
 
-            if(parameterMap.code !== undefined && parameterMap.code !== null) {
+            if(parameterMap.access_token !== undefined && parameterMap.access_token !== null) {
 
                 var oidc = {
                     oauth: {
                         code: parameterMap.code,
+                        access_token: parameterMap.access_token,
                         state: parameterMap.state,
                         scope: parameterMap.scope
                     }
@@ -46,7 +47,7 @@ callback: https://kurtkanaskie.github.io/oidc-client-code-okta/callback.html
             }
 
             var url = window.location.href;
-            var redirect = url.substring(0,url.lastIndexOf('/')) + "/index.html#/callback";
+            var redirect = url.substring(0,url.lastIndexOf('/')) + "/index.html#/home";
             console.log( "Callback and Redirect: " + url + " redirect: " + redirect);
             window.location.href = redirect;
 
