@@ -3,9 +3,9 @@ var app = angular.module("app", ['ui.router']);
 var REDIRECT_URL = "https://kurtkanaskie.github.io/oidc-client-implicit-okta-2019-06-06/callback.html";
 var API_HOST = "https://amer-demo13-test.apigee.net";
 var OIDC_BASEPATH = API_HOST + "/okta-trial/v1/oauth";
-// App = pingstatus-oidc-v1-okta-trial-app-test
-var CLIENT_ID = "RctL2S53lGyA8yA8zGRmBbg2HJb642gp";
-var CLIENT_SECRET = "iB7rciCeMZ6AzHX2";
+// App = pingstatus-oidc-v1-okta-trial-app-implicit-test
+var CLIENT_ID = "h39Ga961tFcBUtOAdO9GA2upRQPddYOk";
+var CLIENT_SECRET = "POmeJQNiy9sNpWPN";
 
 
 app.config(function($stateProvider, $urlRouterProvider) {
