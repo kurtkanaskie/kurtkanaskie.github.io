@@ -10,6 +10,7 @@ var CLIENT_SECRET = "iB7rciCeMZ6AzHX2";
 const chosenLength = (Math.floor(Math.random() * (128 - 43)) + 43);
 const code_verifier = generateRandomAlphaNumericString(chosenLength);
 console.log( "chosenLength: " + chosenLength + " code_verifier: " code_verifier);
+console.log( "CryptoJS.SHA256: " + CryptoJS.SHA256('foo') );
 const code_challenge = base64url(CryptoJS.SHA256(code_verifier));
 console.log( "code_challenge: " + code_challenge );
 
