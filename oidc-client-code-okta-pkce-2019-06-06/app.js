@@ -10,10 +10,6 @@ var CLIENT_SECRET = "1pgt3TetAk69HioD";
 const sha256 = CryptoJS.SHA256;
 const Base64 = CryptoJS.enc.Base64;
 
-var chosenLength;
-var code_verifier;
-var code_challenge;
-
 function base64url(source) {
   // Encode in classical base64
   var encodedSource = Base64.stringify(source);
@@ -82,6 +78,7 @@ app.controller("CallbackController", function($scope, $http, $window) {
       $scope.message = "You are not authorized";
     } else {
       var code = JSON.parse($window.localStorage.getItem("oidc")).oauth.code;
+      var code_verifier = $window.localStorage.getItem("code_verifier");
       var data = { 
         client_id:CLIENT_ID,
         client_secret:CLIENT_SECRET,
@@ -140,6 +137,7 @@ app.controller("HomeController", function($scope, $http, $state, $window) {
       chosenLength = (Math.floor(Math.random() * (128 - 43)) + 43);
       code_verifier = generateRandomAlphaNumericString(chosenLength);
       code_challenge = base64url(sha256(code_verifier));
+      $window.localStorage.setItem("code_verifier", code_verifier);
       console.log('\n');
       console.log('code_verifier=' + code_verifier);
       console.log('code_challenge=' + code_challenge);
