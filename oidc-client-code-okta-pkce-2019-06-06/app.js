@@ -9,7 +9,9 @@ var CLIENT_SECRET = "iB7rciCeMZ6AzHX2";
 
 const chosenLength = (Math.floor(Math.random() * (128 - 43)) + 43);
 const code_verifier = generateRandomAlphaNumericString(chosenLength);
-const code_challenge = base64url(sha256(code_verifier));
+console.log( "chosenLength: " + chosenLength + " code_verifier: " code_verifier);
+const code_challenge = base64url(CryptoJS.SHA256(code_verifier));
+console.log( "code_challenge: " + code_challenge );
 
 function base64url(source) {
   // Encode in classical base64
