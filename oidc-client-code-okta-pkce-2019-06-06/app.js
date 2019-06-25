@@ -7,12 +7,16 @@ var OIDC_BASEPATH = API_HOST + "/okta-trial/v1/oauth-pkce";
 var CLIENT_ID = "RctL2S53lGyA8yA8zGRmBbg2HJb642gp";
 var CLIENT_SECRET = "iB7rciCeMZ6AzHX2";
 
+const sha256 = CryptoJS.SHA256;
+const Base64 = CryptoJS.enc.Base64;
+
 const chosenLength = (Math.floor(Math.random() * (128 - 43)) + 43);
 const code_verifier = generateRandomAlphaNumericString(chosenLength);
-console.log( "chosenLength: " + chosenLength + " code_verifier: " code_verifier);
-console.log( "CryptoJS.SHA256: " + CryptoJS.SHA256('foo') );
-const code_challenge = base64url(CryptoJS.SHA256(code_verifier));
-console.log( "code_challenge: " + code_challenge );
+const code_challenge = base64url(sha256(code_verifier));
+
+console.log('\n');
+console.log('code_verifier=' + code_verifier);
+console.log('code_challenge=' + code_challenge);
 
 function base64url(source) {
   // Encode in classical base64
