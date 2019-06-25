@@ -10,13 +10,9 @@ var CLIENT_SECRET = "1pgt3TetAk69HioD";
 const sha256 = CryptoJS.SHA256;
 const Base64 = CryptoJS.enc.Base64;
 
-const chosenLength = (Math.floor(Math.random() * (128 - 43)) + 43);
-const code_verifier = generateRandomAlphaNumericString(chosenLength);
-const code_challenge = base64url(sha256(code_verifier));
-
-console.log('\n');
-console.log('code_verifier=' + code_verifier);
-console.log('code_challenge=' + code_challenge);
+var chosenLength;
+var code_verifier;
+var code_challenge;
 
 function base64url(source) {
   // Encode in classical base64
@@ -141,6 +137,13 @@ app.controller("HomeController", function($scope, $http, $state, $window) {
     $scope.login = function() {
       var url = $window.location.href;
       var redirect = url.replace("index.html#/home","callback.html");
+      chosenLength = (Math.floor(Math.random() * (128 - 43)) + 43);
+      code_verifier = generateRandomAlphaNumericString(chosenLength);
+      code_challenge = base64url(sha256(code_verifier));
+      console.log('\n');
+      console.log('code_verifier=' + code_verifier);
+      console.log('code_challenge=' + code_challenge);
+      console.log('\n');
       var authorize = OIDC_BASEPATH + "/authorize" 
           + "?client_id=" + CLIENT_ID
           + "&client_secret=" + CLIENT_SECRET
