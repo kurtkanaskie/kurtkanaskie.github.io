@@ -3,9 +3,9 @@ var app = angular.module("app", ['ui.router']);
 var REDIRECT_URL = "https://kurtkanaskie.github.io/oidc-client-code-okta-pkce-2019-06-06/callback.html";
 var API_HOST = "https://amer-demo13-test.apigee.net";
 var OIDC_BASEPATH = API_HOST + "/okta-trial/v1/oauth-pkce";
-// App = pingstatus-oidc-v1-okta-trial-app-test
-var CLIENT_ID = "RctL2S53lGyA8yA8zGRmBbg2HJb642gp";
-var CLIENT_SECRET = "iB7rciCeMZ6AzHX2";
+// App = pingstatus-oidc-v1-okta-trial-pkce-app-test
+var CLIENT_ID = "6bA7nYtd5gx0rvDRbtXsoamlCn4jhJGx";
+var CLIENT_SECRET = "1pgt3TetAk69HioD";
 
 const sha256 = CryptoJS.SHA256;
 const Base64 = CryptoJS.enc.Base64;
