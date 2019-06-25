@@ -91,6 +91,7 @@ app.controller("CallbackController", function($scope, $http, $window) {
         client_secret:CLIENT_SECRET,
         grant_type:'authorization_code',
         code:code,
+        code_verifier:code_verifier,
         redirect_uri:REDIRECT_URL
       };
       var fpdata = Object.keys(data).map((key) => { 
