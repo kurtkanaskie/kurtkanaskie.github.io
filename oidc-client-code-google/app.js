@@ -3,9 +3,12 @@ var app = angular.module("app", ['ui.router']);
 var REDIRECT_URL = "https://kurtkanaskie.github.io/oidc-client-code-google/callback.html";
 var API_HOST = "https://amer-demo13-test.apigee.net";
 var OIDC_BASEPATH = API_HOST + "/oidc-google/v1/oauth";
+var HEALTHCARE_BASESPATH = API_HOST + "/google-healthcare/v1";
+
 // App = pingstatus-oidc-v1-google-app-test
 var CLIENT_ID = "lbOLI2z37nL9hKWGvNJKBOMyw3lDzJvx";
 var CLIENT_SECRET = "1Gk5URQzQEK5SYS8";
+
 
 
 app.config(function($stateProvider, $urlRouterProvider) {
@@ -217,7 +220,7 @@ app.controller("LocationDatasetController", function($scope, $http, $window) {
       $http({
           headers: {"Authorization":"Bearer " + token},
           method : "GET",
-          url : OIDC_BASEPATH + "/location_datasets"
+          url : HEALTHCARE_BASESPATH + "/location_datasets"
       }).then(function successCallback(response) {
         console.log( "Location Dataset OK: " + response.status + JSON.stringify(response.data) );
         $scope.status = response.status;
