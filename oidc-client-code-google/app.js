@@ -25,15 +25,15 @@ app.config(function($stateProvider, $urlRouterProvider) {
             templateUrl: 'userinfo.html',
             controller: 'UserinfoController'
         })
-        .state('introspect', {
-            url: '/introspect',
-            templateUrl: 'introspect.html',
-            controller: 'IntrospectController'
-        })
         .state('ping', {
             url: '/ping',
             templateUrl: 'ping.html',
             controller: 'PingstatusPingController'
+        })
+        .state('demo', {
+            url: '/location_datasets',
+            templateUrl: 'location_datasets.html',
+            controller: 'LocationDatasetController'
         });
     $urlRouterProvider.otherwise('/home');
 });
@@ -202,8 +202,8 @@ app.controller("UserinfoController", function($scope, $http, $window) {
  
 });
 
-app.controller("IntrospectController", function($scope, $http, $window) {
-    console.log( "IntrospectController" );
+app.controller("LocationDatasetController", function($scope, $http, $window) {
+    console.log( "LocationDatasetController" );
  
     var oidc = $window.localStorage.getItem("oidc");
     // local storage can only hold strings, if not set "null"
@@ -217,17 +217,17 @@ app.controller("IntrospectController", function($scope, $http, $window) {
       $http({
           headers: {"Authorization":"Bearer " + token},
           method : "GET",
-          url : OIDC_BASEPATH + "/introspect"
+          url : OIDC_BASEPATH + "/location_datasets"
       }).then(function successCallback(response) {
-        console.log( "Introspect OK: " + response.status + JSON.stringify(response.data) );
+        console.log( "Location Dataset OK: " + response.status + JSON.stringify(response.data) );
         $scope.status = response.status;
         $scope.message = "OK";
-        $scope.introspect = JSON.stringify(response.data, undefined, 2);
+        $scope.location_datasets = JSON.stringify(response.data, undefined, 2);
       }, function errorCallback(response) {
-        console.log( "Introspect ERROR: " + response.status + " - " + response.statusText + " - " + JSON.stringify(response.data) );
+        console.log( "Location Dataset ERROR: " + response.status + " - " + response.statusText + " - " + JSON.stringify(response.data) );
         $scope.status = response.status;
         $scope.message = response.statusText;
-        $scope.introspect = {};
+        $scope.location_datasets = {};
       });
     }
  
