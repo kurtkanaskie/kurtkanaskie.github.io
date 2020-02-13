@@ -128,10 +128,10 @@ app.controller("HomeController", function($scope, $http, $state, $window) {
 
       var url = $window.location.href;
       var redirect = url.replace("index.html#/home","index.html");
-      var logout = OIDC_BASEPATH + "/logout?access_token=" + token + "&post_logout_redirect_uri=" + redirect + "&state=PA-logout";
+      var logout = OIDC_BASEPATH + "/logout?access_token=" + token";
       console.log( "LOGOUT: " + logout );
       
-      $window.location.href = logout;
+      // $window.location.href = logout;
       $state.reload();
     };
 
