@@ -169,7 +169,7 @@ app.controller("PingstatusPingController", function($scope, $http, $window) {
           // console.log( "Ping ERROR: " + response.status + " - " + response.statusText + " - " + JSON.stringify(response.data) );
           $scope.status = response.status;
           $scope.message = response.statusText;
-          $scope.ping = {};
+          $scope.ping = JSON.stringify(response.data, undefined, 2);
         });
     }
  
@@ -200,7 +200,7 @@ app.controller("UserinfoController", function($scope, $http, $window) {
         // console.log( "Profile ERROR: " + response.status + " - " + response.statusText + " - " + JSON.stringify(response.data) );
         $scope.status = response.status;
         $scope.message = response.statusText;
-        $scope.userinfo = {};
+        $scope.userinfo = JSON.stringify(response.data, undefined, 2);
       });
     }
  
@@ -231,7 +231,7 @@ app.controller("LocationDatasetController", function($scope, $http, $window) {
         console.log( "Location Dataset ERROR: " + response.status + " - " + response.statusText + " - " + JSON.stringify(response.data) );
         $scope.status = response.status;
         $scope.message = response.statusText;
-        $scope.location_datasets = {};
+        $scope.location_datasets = JSON.stringify(response.data, undefined, 2);
       });
     }
  
