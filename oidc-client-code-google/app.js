@@ -126,6 +126,7 @@ app.controller("HomeController", function($scope, $http, $state, $window) {
 
     $scope.logout = function() {
       var token = JSON.parse($window.localStorage.getItem("oidc")).oauth.access_token;
+      console.log( "LOGOUT token: " + token );
       $window.localStorage.setItem("oidc", "");
       /*
       
@@ -145,16 +146,8 @@ app.controller("HomeController", function($scope, $http, $state, $window) {
             url : OIDC_REVOKE
         }).then(function successCallback(response) {
           alert("Logged out!");
-          // console.log( "Ping OK: " + response.status + JSON.stringify(response.data) );
-          // $scope.status = response.status;
-          // $scope.message = "OK";
-          // $scope.ping = JSON.stringify(response.data, undefined, 2);
         }, function errorCallback(response) {
-          // console.log( "Ping ERROR: " + response.status + " - " + response.statusText + " - " + JSON.stringify(response.data) );
-          alert("Error Logging out!\n" + JSON.stringify(response.data, undefined, 2) );
-          // $scope.status = response.status;
-          // $scope.message = response.statusText;
-          // $scope.ping = JSON.stringify(response.data, undefined, 2);
+          alert("Error Logging out!\n" + response.status + "\n" + response.statusText + "\n" + JSON.stringify(response.data, undefined, 2) );
         });
     };
 
