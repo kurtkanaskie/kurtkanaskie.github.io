@@ -152,6 +152,7 @@ app.controller("HomeController", function($scope, $http, $state, $window) {
     };
 
     var oidc = $window.localStorage.getItem("oidc");
+    $window.location.href = url.replace("index.html#/home","index.html");
     $state.reload();
     if( oidc === null || oidc === "" ) {
         $scope.inOrOut = "out";
