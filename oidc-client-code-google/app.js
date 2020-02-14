@@ -3,6 +3,9 @@ var app = angular.module("app", ['ui.router']);
 var REDIRECT_URL = "https://kurtkanaskie.github.io/oidc-client-code-google/callback.html";
 var API_HOST = "https://amer-demo13-test.apigee.net";
 var OIDC_BASEPATH = API_HOST + "/oidc-google/v1/oauth";
+var OIDC_AUTH = API_HOST + "/oidc-google/v1/oauth/authorize";
+var OIDC_TOKEN = API_HOST + "/oidc-google/v1/oauth/token";
+var OIDC_REVOKE = API_HOST + "/oidc-google/v1/oauth/revoke";
 var HEALTHCARE_BASESPATH = API_HOST + "/google-healthcare/v1beta1";
 var HEALTHCARE_LOCATION_DATASETS = HEALTHCARE_BASESPATH + "/projects/edge-oidc-demo/locations/us/datasets/demo";
 
@@ -123,6 +126,8 @@ app.controller("HomeController", function($scope, $http, $state, $window) {
 
     $scope.logout = function() {
       var token = JSON.parse($window.localStorage.getItem("oidc")).oauth.access_token;
+      $window.localStorage.setItem("oidc", "");
+      /*
       
       $window.localStorage.setItem("oidc", "");
 
@@ -131,8 +136,26 @@ app.controller("HomeController", function($scope, $http, $state, $window) {
       var logout = OIDC_BASEPATH + "/logout?access_token=" + token;
       console.log( "LOGOUT: " + logout );
       
-      // $window.location.href = logout;
+      $window.location.href = logout;
       $state.reload();
+      */
+      $http({
+            headers: {"Authorization":"Bearer " + token},
+            method : "POST",
+            url : OIDC_REVOKE
+        }).then(function successCallback(response) {
+          alert("Logged out!");
+          // console.log( "Ping OK: " + response.status + JSON.stringify(response.data) );
+          // $scope.status = response.status;
+          // $scope.message = "OK";
+          // $scope.ping = JSON.stringify(response.data, undefined, 2);
+        }, function errorCallback(response) {
+          // console.log( "Ping ERROR: " + response.status + " - " + response.statusText + " - " + JSON.stringify(response.data) );
+          alert("Error Logging out!\n" + JSON.stringify(response.data, undefined, 2) );
+          // $scope.status = response.status;
+          // $scope.message = response.statusText;
+          // $scope.ping = JSON.stringify(response.data, undefined, 2);
+        });
     };
 
     var oidc = $window.localStorage.getItem("oidc");
