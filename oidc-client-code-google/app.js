@@ -151,8 +151,8 @@ app.controller("HomeController", function($scope, $http, $state, $window) {
         });
     };
 
-    var oidc = $window.localStorage.getItem("oidc");
-    var url = $window.location.href;
+    // var oidc = $window.localStorage.getItem("oidc");
+    // var url = $window.location.href;
     // $window.location.href = url.replace("index.html#/home","index.html");
     // $state.reload();
     if( oidc === null || oidc === "" ) {
