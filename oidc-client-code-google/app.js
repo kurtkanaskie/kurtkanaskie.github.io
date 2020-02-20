@@ -151,10 +151,10 @@ app.controller("HomeController", function($scope, $http, $state, $window) {
         });
     };
 
-    // var oidc = $window.localStorage.getItem("oidc");
     // var url = $window.location.href;
     // $window.location.href = url.replace("index.html#/home","index.html");
     // $state.reload();
+    var oidc = $window.localStorage.getItem("oidc");
     if( oidc === null || oidc === "" ) {
         $scope.inOrOut = "out";
     } else {
