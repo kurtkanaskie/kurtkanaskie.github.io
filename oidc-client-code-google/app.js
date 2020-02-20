@@ -134,7 +134,7 @@ app.controller("HomeController", function($scope, $http, $state, $window) {
             method : "POST",
             url : OIDC_REVOKE
         }).then(function successCallback(response) {
-          console.log( "Setting SCOPE out via REVOKE POST" );
+          // console.log( "Setting SCOPE out via REVOKE POST" );
           $scope.inOrOut = "out";
         }, function errorCallback(response) {
           alert("Error Logging out!\n" + response.status + "\n" + response.statusText + "\n" + JSON.stringify(response.data, undefined, 2) );
@@ -142,12 +142,10 @@ app.controller("HomeController", function($scope, $http, $state, $window) {
     };
 
     var oidc = $window.localStorage.getItem("oidc");
-    console.log( "SCOPE: " + $scope.inOrOut + " oidc " + oidc);
+    // console.log( "SCOPE: " + $scope.inOrOut + " oidc " + oidc);
     if( oidc === null || oidc === "" ) {
-      console.log( "Setting SCOPE out" );
       $scope.inOrOut = "out";
     } else {
-      console.log( "Setting SCOPE in" );
 		  $scope.inOrOut = "in";
 	}
  
