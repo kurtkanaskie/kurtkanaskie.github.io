@@ -138,17 +138,20 @@ app.controller("HomeController", function($scope, $http, $state, $window) {
         }, function errorCallback(response) {
           alert("Error Logging out!\n" + response.status + "\n" + response.statusText + "\n" + JSON.stringify(response.data, undefined, 2) );
         });
+        $scope.inOrOut = "out";
+        console.log( "Setting SCOPE out" );
     };
 
-    var url = $window.location.href;
-    console.log( "URL: " + url );
-    $window.location.href = url.replace("index.html#/home","index.html");
-    $state.reload();
+    // var url = $window.location.href;
+    console.log( "SCOPE: " + $scope.inOrOut );
+    // Don't do this
+    // $window.location.href = url.replace("index.html#/home","index.html");
+    // $state.reload();
     var oidc = $window.localStorage.getItem("oidc");
     if( oidc === null || oidc === "" ) {
         $scope.inOrOut = "out";
     } else {
-		$scope.inOrOut = "in";
+		  $scope.inOrOut = "in";
 	}
  
 });
