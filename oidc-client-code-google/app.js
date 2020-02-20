@@ -128,18 +128,7 @@ app.controller("HomeController", function($scope, $http, $state, $window) {
       var token = JSON.parse($window.localStorage.getItem("oidc")).oauth.access_token;
       console.log( "LOGOUT token: " + token );
       $window.localStorage.setItem("oidc", "");
-      /*
       
-      $window.localStorage.setItem("oidc", "");
-
-      var url = $window.location.href;
-      var redirect = url.replace("index.html#/home","index.html");
-      var logout = OIDC_BASEPATH + "/logout?access_token=" + token;
-      console.log( "LOGOUT: " + logout );
-      
-      $window.location.href = logout;
-      $state.reload();
-      */
       $http({
             headers: {"Authorization":"Bearer " + token},
             method : "POST",
@@ -151,9 +140,10 @@ app.controller("HomeController", function($scope, $http, $state, $window) {
         });
     };
 
-    // var url = $window.location.href;
-    // $window.location.href = url.replace("index.html#/home","index.html");
-    // $state.reload();
+    var url = $window.location.href;
+    console.log( "URL: " + url );
+    $window.location.href = url.replace("index.html#/home","index.html");
+    $state.reload();
     var oidc = $window.localStorage.getItem("oidc");
     if( oidc === null || oidc === "" ) {
         $scope.inOrOut = "out";
