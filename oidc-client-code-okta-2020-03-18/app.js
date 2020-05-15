@@ -1,7 +1,8 @@
 var app = angular.module("app", ['ui.router']);
 
 var REDIRECT_URL = "https://kurtkanaskie.github.io/oidc-client-code-okta-2020-03-18/callback.html";
-var API_HOST = "https://amer-demo13-test.apigee.net";
+var API_HOST = "https://api-test.kurtkanaskie.net";
+// var API_HOST = "https://amer-demo13-test.apigee.net";
 var OIDC_BASEPATH = API_HOST + "/okta-trial/v1/oauth";
 // App = pingstatus-oidc-v1-okta-trial-app-test
 var CLIENT_ID = "RctL2S53lGyA8yA8zGRmBbg2HJb642gp";
