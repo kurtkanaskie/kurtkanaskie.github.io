@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script>
+			function resizeIframe(obj) {
+				obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + 'px';
+			}
+		</script>
+	</head>
+	<body>
+		<div style="margin:20px;">
+			<iframe src="https://www.appsheet.com/start/ba11b9b3-8df2-46dc-9714-de5ebbe6d340?refresh=1&wipe=1" width="100%" scrolling="no"></iframe>
+		</div>
+		<p id="callback"></p>
+		<script type="text/javascript" src="../js/iframeResizer.min.js"></script> 
+		<script type="text/javascript">
+			iFrameResize({
+				log                     : true,                  // Enable console logging
+				enablePublicMethods     : true,                  // Enable methods within iframe hosted page
+				resizedCallback         : function(messageData){ // Callback fn when resize is received
+					$('p#callback').html(
+						'<b>Frame ID:</b> '    + messageData.iframe.id +
+						' <b>Height:</b> '     + messageData.height +
+						' <b>Width:</b> '      + messageData.width + 
+						' <b>Event type:</b> ' + messageData.type
+					);
+				},
+				messageCallback         : function(messageData){ // Callback fn when message is received
+					$('p#callback').html(
+						'<b>Frame ID:</b> '    + messageData.iframe.id +
+						' <b>Message:</b> '    + messageData.message
+					);
+					alert(messageData.message);
+				},
+				closedCallback         : function(id){ // Callback fn when iFrame is closed
+					$('p#callback').html(
+						'<b>IFrame (</b>'    + id +
+						'<b>) removed from page.</b>'
+					);
+				}
+			});
+		</script>
+	</body>
+</html>
