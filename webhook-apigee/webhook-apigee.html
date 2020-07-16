@@ -1,18 +1,13 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<script>
-			function resizeIframe(obj) {
-				obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + 'px';
-			}
-		</script>
 	</head>
 	<body>
 		<div style="margin:20px;">
 			<iframe src="https://www.appsheet.com/start/ba11b9b3-8df2-46dc-9714-de5ebbe6d340?refresh=1&wipe=1" width="100%" scrolling="no"></iframe>
 		</div>
 		<p id="callback"></p>
-		<script type="text/javascript" src="../js/iframeResizer.min.js"></script> 
+		<script type="text/javascript" src="./iframeResizer.min.js"></script> 
 		<script type="text/javascript">
 			iFrameResize({
 				log                     : true,                  // Enable console logging
