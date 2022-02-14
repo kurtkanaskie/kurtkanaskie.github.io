@@ -1,7 +1,7 @@
 var app = angular.module("app", ['ui.router']);
 
 var REDIRECT_URL = "https://kurtkanaskie.github.io/oidc-client-code-google-x/callback.html";
-var API_HOST = "https://xapi-test.kurtkanaksie.net";
+var API_HOST = "https://xapi-test.kurtkanaskie.net";
 var OIDC_BASEPATH = API_HOST + "/oidc-google/v1/oauth";
 var OIDC_AUTH = API_HOST + "/oidc-google/v1/oauth/authorize";
 var OIDC_TOKEN = API_HOST + "/oidc-google/v1/oauth/token";
