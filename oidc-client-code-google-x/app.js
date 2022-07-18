@@ -56,8 +56,6 @@ app.controller("CallbackController", function($scope, $http, $window) {
     } else {
       var code = JSON.parse($window.localStorage.getItem("oidc")).oauth.code;
       var data = { 
-//        client_id:CLIENT_ID,
-//        client_secret:CLIENT_SECRET,
         grant_type:'authorization_code',
         code:code,
         redirect_uri:REDIRECT_URL
@@ -114,7 +112,6 @@ app.controller("HomeController", function($scope, $http, $state, $window) {
       var redirect = url.replace("index.html#/home","callback.html");
       var authorize = OIDC_BASEPATH + "/authorize" 
           + "?client_id=" + CLIENT_ID
-          + "&client_secret=" + CLIENT_SECRET
           + "&redirect_uri=" + REDIRECT_URL
           + "&response_type=code"
           + "&state=PA-code"
