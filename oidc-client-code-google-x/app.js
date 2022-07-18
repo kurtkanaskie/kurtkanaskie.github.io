@@ -68,7 +68,7 @@ app.controller("CallbackController", function($scope, $http, $window) {
 
       console.log( "FPDATA: " + JSON.stringify(fpdata));
 
-      var unpw = CLIENT_ID.concat(":",CLIENT_SECRET);
+      var unpw = "Basic " + CLIENT_ID + ":" + CLIENT_SECRET;
 
       $http({
         headers: {
