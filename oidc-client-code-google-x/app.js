@@ -68,8 +68,13 @@ app.controller("CallbackController", function($scope, $http, $window) {
 
       console.log( "FPDATA: " + JSON.stringify(fpdata));
 
+      var unpw = CLIENT_ID.concat(":",CLIENT_SECRET);
+
       $http({
-        headers: {"Content-Type":"application/x-www-form-urlencoded"},
+        headers: {
+          "Content-Type":"application/x-www-form-urlencoded",
+          "Authorization":btoa(unpw)
+        },
         method : "POST",
         url : OIDC_BASEPATH + "/token",
         data : fpdata
