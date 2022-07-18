@@ -13,8 +13,6 @@ var HEALTHCARE_LOCATION_DATASETS = HEALTHCARE_BASESPATH + "/projects/edge-oidc-d
 var CLIENT_ID = "BSfd4gOSAE3AIO0WGEh2Y4JLUYx2MhgoltvH3PHLpXDoy2dL";
 var CLIENT_SECRET = "yCL5DNiLUllbdyxIz6c1kZXdEomG4RYkpVyjFGlX5CAnI8ZOsiv1MgAmQGz3Gx7C";
 
-
-
 app.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('home', {
