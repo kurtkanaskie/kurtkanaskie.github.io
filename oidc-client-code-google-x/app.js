@@ -113,7 +113,7 @@ app.controller("HomeController", function($scope, $http, $state, $window) {
           + "&redirect_uri=" + REDIRECT_URL
           + "&response_type=code"
           + "&state=PA-code"
-          + "&scope=email profile openid https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/cloud-platform";
+          + "&scope=email profile openid";
 
       console.log( "URL: " + url );
       console.log( "REDIRECT: " + redirect);
