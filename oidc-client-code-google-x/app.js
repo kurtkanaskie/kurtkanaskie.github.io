@@ -113,7 +113,7 @@ app.controller("HomeController", function($scope, $http, $state, $window) {
           + "&redirect_uri=" + REDIRECT_URL
           + "&response_type=code"
           + "&state=PA-code"
-          + "&scope=email profile openid";
+          + "&scope=email profile openid https://foo.bar";
 
       console.log( "URL: " + url );
       console.log( "REDIRECT: " + redirect);
